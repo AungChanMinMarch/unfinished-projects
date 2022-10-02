@@ -1,0 +1,57 @@
+/*Login*/
+#log_in_form {
+	text-align: center;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+
+	width: 90%;
+	max-width: 350px;
+	padding: 40px 60px;
+	gap: 15px;
+
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19),
+		4px 0 8px 0 rgba(0, 0, 0, 0.2), 6px 0 20px 0 rgba(0, 0, 0, 0.19);
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#log_in_form > * {
+	width: 100%;
+	padding: 10px 16px;
+	font-size: 1.2rem;
+	border-radius: 10px;
+}
+#breaker {
+	display: flex;
+	flex-direction: row;
+}
+#breaker::before,
+#breaker::after {
+	content: "";
+	flex: 1 1;
+	border-bottom: 1px solid #000;
+	margin: auto;
+}
+#breaker::before {
+	margin-right: 20px;
+}
+#breaker::after {
+	margin-left: 20px;
+}
+/*@media (min-width: 600px) and (orientation:portrait) {
+  #log_in_form{
+	width: 95%;
+	padding: 40px;
+	gap:  20px;
+}
+#log_in_form > *{
+
+	font-size: 2rem;
+}
+}*/

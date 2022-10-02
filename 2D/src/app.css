@@ -1,0 +1,23 @@
+body {
+	background-color: #010101;
+	color: #eee;
+	margin: 0;
+}
+* {
+	box-sizing: border-box;
+}
+header {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #eee;
+}
+.svg_icons {
+	height: 100%;
+}
+.btn {
+	background-color: #fff;
+	padding: 2px 4px;
+}

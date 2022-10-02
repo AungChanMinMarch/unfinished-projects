@@ -1,0 +1,55 @@
+
+            body{
+                margin: 0%;
+            }
+            #characterList,.control, img{
+                display: none;
+            }
+
+
+            #delay{
+                width: 100%;
+                height: 90vh;
+                display: grid;
+                justify-content: center;
+                align-content: space-evenly;
+            }
+            #delay button{
+                width: 32vw;
+                height: calc(8vw + 8vh);
+                border-radius: 0.5vw;
+                font-size: 6.5vw;
+            }
+
+            #characterList{
+                width: 100%;
+                height: 95vh;
+                justify-content: center;
+                align-content: space-evenly;
+            }
+            #characterList button{
+                width: 20vw;
+                height: calc(2.5vw + 7.5vh);
+                border-radius: 2%;
+                font-size: 3vw;
+            }
+            
+            .control{
+                position: absolute;
+                top: calc(90vh - 7vw);
+                left: 84vw;
+                font-size: 2vw;
+            }
+            fieldset{
+                width: 6vw;
+                height: 8vw;
+                border-radius: 50%;
+                text-align: center;
+                background:blue;
+            }
+        .eki button{
+            width: 5vw;
+            height: 5vw;
+            border-radius: 50%;
+            font-size: 2vw;
+        }

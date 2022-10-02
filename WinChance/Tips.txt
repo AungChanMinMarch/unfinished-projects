@@ -1,0 +1,12 @@
+It is a good idea to code step by step. Now I will give you some tips I did in my coding. these steps are only for asking user information. Feel free to ask me for any steps
+
+ 1. Create an HTML file that displays HelloWrold when opening it. (HTML)
+ 2. Now wrtie an HTML file that displays a table of four rows and four columns, each cells containing Hi. (HTML)
+ 3. Now it is time to code for our project. Edit the code in HTML file (written in step 2) to display slots(just like the file I shared you) (HTML)
+ 4. Use onclick attribute to alert Hello upon clicking the cell of the table. (HTML, JS)
+ 5. Use prompt statement to ask user the information. (JS)
+ 6. Create ID for each cell. Use ID to remove the text in the cell(e.g. slot1, slot2,..) and diplay the information that user inputs when clicking the button. (HTML, JS) HINT:innerHTML is a good way for this.
+
+
+Steps for version0
+1. Rewrite the program that asks hero information(only speed) to the user. That program will tells you the max speed when clicking calculate button. Test carefully whether your program works properly. (Remember to handle the value type.)

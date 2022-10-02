@@ -1,0 +1,25 @@
+body{
+	background-size: cover;
+}
+
+
+table{
+	position: absolute;
+	width: 100%;
+	align-content: center;
+	display: flex;
+}
+td{
+	height: :90 %;
+
+}
+
+button{
+	width: 90%;
+	height: 90%;
+	background-color: blue;
+}
+#textview{
+	height: : 120%;
+	background-color: gray;
+}

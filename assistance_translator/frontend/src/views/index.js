@@ -1,0 +1,6 @@
+export { default as Home } from './Home/Home.jsx'
+export { default as  Auth } from './Auth/Auth.jsx'
+export { default as Novel } from './Novel/Novel.jsx'
+export {default as AddNovel } from './AddNovel/AddNovel.jsx'
+export { default as Chapter } from './Chapter/Chapter.jsx'
+export {default as AddChapter } from './AddChapter/AddChapter.jsx'

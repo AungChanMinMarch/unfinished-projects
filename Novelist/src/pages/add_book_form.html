@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Add Book Form</title>
+	</head>
+	<body>
+		<div id="add_book_form">
+			<input
+				id="title"
+				name="book_title"
+				type="text"
+				placeholder="Title"
+				required
+			/>
+			<input
+				type="text"
+				id="description"
+				name="description"
+				placeholder="Description"
+			/>
+			<fieldset>
+				<legend align="left">Templates</legend>
+				<input type="radio" name="template" id="novel" value="novel" />
+				<label for="novel">Novel Template</label> <br />
+
+				<input type="radio" name="template" id="empty" value="empty" />
+				<label for="empty">Empty Template</label>
+			</fieldset>
+
+			<div>
+				<button id="cancel">Cancel</button>
+				<button id="ok">OK</button>
+			</div>
+		</div>
+		<div>hello world</div>
+	</body>
+</html>

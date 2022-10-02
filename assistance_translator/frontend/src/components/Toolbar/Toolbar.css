@@ -1,0 +1,26 @@
+.toolsbar{
+	background-color: var(--color);
+}
+
+.tool{
+	background-color: var(--bgColor);
+	color: var(--color);
+	width: 15vw;
+}
+.tool.active{
+	background-color: blue;
+	color: #eee;
+}
+
+
+.auxbar{
+	background-color: var(--color);
+}
+.auxbar.big{
+	height: 60vh;
+	background-color: var(--bgColor);
+}
+.auxtool{
+	background-color:  var(--bgColor);
+	color:  var(--color);
+}

@@ -1,0 +1,11 @@
+.Auth{
+	width: 90%;
+	max-width: 600px;
+	margin: auto;
+
+	flex-direction: column;
+}
+
+.Auth > h4{
+	text-decoration: underline;
+}

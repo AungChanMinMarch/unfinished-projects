@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Playground</title>
+
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <div id="code-playground">
+      <!-- dark/light theme toggle -- https://www.youtube.com/watch?v=xodD0nw2veQ&list=PLNN9TOm_sYHAdXdmP8b_Gw8EFK64IMGjX -->
+      <div class="coding-area">
+        <label class="button" for="html">HTML</label>
+        <textarea id="html" class="coding-area" placeholder="HTML"></textarea>
+
+        <label class="button" for="css"> CSS </label>
+        <textarea id="css" class="coding-area" placeholder="CSS"></textarea>
+
+        <label class="button" for="js"> Javascript </label>
+        <textarea id="js" class="coding-area" placeholder="JS"></textarea>
+      </div>
+      <iframe
+        id="coding-result-area"
+        name="result-box"
+        title="result"
+        frameborder="1"
+      ></iframe>
+    </div>
+  </body>
+  <script>
+    const resultArea = document.getElementById("coding-result-area");
+    const html = document.getElementById("html");
+    const css = document.getElementById("css");
+    const js = document.getElementById("js");
+
+    const url = document.location.href;
+    const codePlaygroundId = url.split("?")[1].split("=")[1];
+    const code = JSON.parse(localStorage.getItem(codePlaygroundId));
+
+    function run() {
+      const resultDoc = resultArea.contentWindow.document;
+      resultDoc.open();
+      resultDoc.write("<style>" + css.value + "</style>" + html.value);
+      resultDoc.close();
+    }
+    window.onload = function () {
+      if (code.html) html.value = code.html;
+      if (code.css) css.value = code.css;
+      if (code.js) js.value = code.js;
+      run();
+    };
+    window.onkeyup = function () {
+      run();
+    };
+  </script>
+</html>

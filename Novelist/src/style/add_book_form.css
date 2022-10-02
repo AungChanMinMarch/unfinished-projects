@@ -1,0 +1,41 @@
+/*input {
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 1px solid;
+}*/
+div:last-child {
+    display: flex;
+    justify-content: space-around;
+}
+#add_book_form {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    width: 90%;
+    max-width: 350px;
+    padding: 40px 60px;
+    gap: 15px;
+
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19),
+        4px 0 8px 0 rgba(0, 0, 0, 0.2), 6px 0 20px 0 rgba(0, 0, 0, 0.19);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#add_book_form > * {
+    width: 100%;
+    font-size: 1.3rem;
+    border-radius: 10px;
+}
+input {
+    padding: 10px 16px;
+}
+button {
+    font-size: inherit;
+}

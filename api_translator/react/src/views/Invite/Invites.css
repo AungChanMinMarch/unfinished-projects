@@ -1,0 +1,6 @@
+.Invites{
+	font-size: 1.2rem;
+}
+.Invites > details{
+	margin: 20px;
+}

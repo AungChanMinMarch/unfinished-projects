@@ -1,0 +1,37 @@
+#calc-page {
+  background-color: green;
+  position: fixed;
+  top: calc(10vh + 4px);
+  bottom: 4px;
+  overflow-y: scroll;
+}
+#ask-rate,
+#test-result {
+  margin: 8px;
+  padding: 8px;
+  display: grid;
+  border: 1px solid #000;
+  grid-gap: 4px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  background-color: #3460fa;
+  color: #fff;
+}
+button {
+  font-size: 1em;
+}
+#ask-rate {
+  text-align: right;
+}
+#test-result,
+#ask-rate div {
+  font-size: 1.5em;
+  text-align: right;
+}
+input {
+  width: 100%;
+  height: 80%;
+  margin: auto;
+  font-size: 2em;
+  text-align: right;
+}

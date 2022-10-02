@@ -1,0 +1,172 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: #ecf0f1;
+  overflow: hidden;
+  font-size: 100%;
+}
+.page-change-bar {
+  width: 100%;
+  height: 5vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* not text height 100% make the text vertically*/
+  background-color: #1a4c6e;
+}
+.save {
+  height: 100%;
+}
+.delete {
+  height: 80%;
+}
+img {
+  height: 100%;
+}
+.page-container {
+  width: 100%;
+  height: 95vh;
+}
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+#input-page {
+  z-index: 1;
+  background-color: #88badb;
+}
+#peek-page {
+  background-color: #3498db;
+}
+#calc-page {
+  background-color: #88badb;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 5vh;
+}
+
+#input-display {
+  position: fixed;
+  top: 6vh;
+  left: 1vh;
+  right: 1vh;
+  bottom: 48vh;
+  overflow-y: scroll;
+  background-color: #3498db;
+}
+#keyboard {
+  width: 100%;
+  height: 45vh;
+  position: fixed;
+  bottom: 0;
+  display: grid;
+  grid-gap: 3vw;
+  padding: 3vw;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  background-color: #3498db;
+}
+#keyboard button {
+  height: 9vh;
+  background-color: #1a4c6e;
+  font-size: 1.5em;
+  color: inherit;
+  border: none;
+}
+#keyboard button#is-pressed {
+  background-color: #2980b9;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5) inset,
+    0 0 6px 0 rgba(0, 0, 0, 0.5) inset, 0 0 8px 0 rgba(0, 0, 0, 0.5) inset;
+}
+#del {
+  grid-column: 2/4;
+}
+.line-input,
+.single-input {
+  display: none;
+}
+.enter {
+  display: none;
+  grid-column: 4/5;
+  grid-row: 1/4;
+  height: 100% !important;
+}
+.enter.single-input {
+  grid-row: 4/5;
+}
+#peek-nav {
+  position: fixed;
+  top: 5vh;
+  bottom: 0;
+  left: 0;
+  width: calc(10vw + 1vh);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: inherit;
+}
+#peek-display {
+  position: fixed;
+  top: calc(6vh + 1vw);
+  right: calc(1vh + 1vw);
+  bottom: calc(1vh + 1vw);
+  left: calc(11vw + 1vh);
+  padding: 0;
+  overflow-y: scroll;
+  background-color: inherit;
+}
+#peek-nav a {
+  text-decoration: none;
+  font-size: 1.5em;
+  color: inherit;
+  margin: 0 1vh;
+  text-align: center;
+  background-color: #1a4c6e;
+}
+#peek-display table {
+  line-height: 8vh;
+}
+#peek-display tr:nth-child(even) {
+  background-color: #66acdb;
+}
+#peek-display tr:nth-child(odd) {
+  background-color: #246a99;
+}
+
+#calc-page {
+  position: fixed;
+  top: 5vh;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: scroll;
+
+  display: flex;
+  flex-direction: column;
+}
+.flex-sticky-box {
+  font-size: 1.5em;
+  background-color: #3498db;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  position: sticky;
+  top: 0;
+}
+.flex-sticky-box > div {
+  width: 23vw;
+}
+input {
+  width: 23vw;
+}

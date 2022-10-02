@@ -1,0 +1,11 @@
+.QuestionSlug{
+	flex-direction: column;
+	padding: 20px 10px;
+}
+
+.QuestionSlug-sentence{
+	padding: 5px;
+	margin: 5px 0px;
+	font-size: 1.1rem;
+	background-color: #444;
+}

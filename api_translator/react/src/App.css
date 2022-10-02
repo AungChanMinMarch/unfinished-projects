@@ -1,0 +1,217 @@
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+#root{
+	--main-bgColor:  #222;
+	--sec-bgColor:  #555;
+	--primary:  #090047;
+	--sec: #003d45;
+	--main-color:  #fff;
+	--sec-color:  #ddd;
+
+	width: 100vw;
+	height: 100vh;
+	overflow-y: hidden;
+	background-color: var(--sec-bgColor);
+	color: var(--main-color);
+}
+.view{
+	height: 100%;
+	overflow-y: scroll;
+}
+.fbox, nav{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.fw{
+	width: 100%;
+}
+.dflex{
+	display: flex;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge add Firefox */
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+}
+button{
+	padding: 10px 12px;
+	border-radius: 5px;
+	color: var(--main-color);
+	text-decoration: none;
+}
+button{
+	background-color: var(--primary);
+}
+.addBtn{
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+}
+.addForm{
+	width: 100vw;
+	height: 100vh;
+	padding: 10vw;
+	flex-direction: column;
+}
+
+nav{
+	background: var(--main-bgColor);
+	color: var(--main-color);
+	width: 100vw;
+	padding: 2rem 0.75rem;
+}
+.novel > nav{
+	background-color: var(--sec-color);
+	color: var(--main-bgColor);
+}
+.brandBox{
+	font-size: 1.25rem;
+	letter-spacing: 1.75px;
+}
+.logout{
+	letter-spacing: 2.5px;
+}
+
+.loading, .initial{
+	padding: 40px 20px;
+	font-size: 2rem;
+	letter-spacing: 2px;
+	word-spacing: 8px;
+}
+.loading{
+	color: var(--primary);
+}
+.initial{
+
+	color: var(--main-color);
+}
+.novelName{
+	margin-left: 30px;
+	font-size: 1.2rem;
+	letter-spacing: 2px;
+}
+.editNovel{
+	margin-left: 30px;
+}
+.addChapterTextarea{
+	width: 100%;
+	height: 65%;
+	padding: 10px;
+	margin: 15px auto;
+	font-size: 1.5rem;
+}
+
+.chapter{
+	--h:  100vh;
+	height: var(--h);
+
+	--toolbar-h: 50px;
+	--small-aux-h:  50px;
+	--large-aux-h: 50vh;
+	--page-h: calc(var(--h) - var(--toolbar-h));
+	--large-page-h: calc(var(--h) - var(--toolbar-h) - var(--small-aux-h));
+	--small-page-h:  calc(var(--h) - var(--toolbar-h) - var(--large-aux-h));
+}
+/*.page{
+	background-color: var(--main-bgColor);
+	padding: 10px 5px;
+	height: var(--page-h);
+	overflow: scroll;
+}*/
+.page.large{
+	height: var(--large-page-h);
+}
+.page.small{
+	height: var(--small-page-h);
+}
+
+
+.auxbar > *{
+	background-color: var(--main-bgColor);
+	padding: 5px;
+	border-radius: 2px;
+}
+.small-auxbar{
+	height: var(--small-aux-h);
+}
+.tool{
+	background-color: var(--main-bgColor);
+	color: var(--color);
+	padding: 5px 15px;
+	border-radius: 5px;
+}
+.tool.active{
+	background-color: blue;
+	color: #eee;
+}
+
+.tool.active{
+	background-color: var(--sec);
+}
+
+.addForm{
+	position: fixed;
+	width: 90vw;
+	/*this is important. without this bootm property does not work*/
+	height: auto; 
+	margin: auto;
+	top:  20vh;
+	bottom: calc(var(--toolbar-h) +  var(--small-aux-h) + 5vh);
+}
+.addForm > *{
+	width: 100%;
+}
+.addForm > textarea{
+	height: 80%;
+	padding: 10px;
+	font-size: 1.2rem;
+}
+.add-place{
+	display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.add-footer{
+	display: flex;
+	justify-content: space-around;
+}
+
+.translatebar{
+	height: var(--large-aux-h);
+	display: flex;
+	flex-direction: column;
+}
+.translatebar-header{
+	flex: 0 0 auto;
+	text-align: center;
+	padding: 5px 10px;
+	font-size: 1.5em;
+	background-color: var(--sec);
+}
+.translatebar-footer{
+	flex: 0 0 var(--small-aux-h);
+}
+.translatebar-body{
+	flex: 1 0 auto;
+	background-color: var(--main-bgColor);
+}
+
+.slug{
+	display: flex;
+	text-decoration: none;
+
+	width: 90%;
+	max-width: 600px;
+	margin: 10px auto;
+	background-color: var(--main-bgColor);
+	border-radius: 10px;
+}

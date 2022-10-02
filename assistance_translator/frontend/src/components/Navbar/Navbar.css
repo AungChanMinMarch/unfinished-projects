@@ -1,0 +1,17 @@
+nav{
+	background-color: #333;
+	color: #fff;
+	width: 100vw;
+	padding: 2rem 0.75rem;
+}
+nav > *{
+	display: inline-block;
+}
+.brandBox{
+	font-size: 1.25rem;
+	letter-spacing: 1.75px;
+}
+.logout{
+	float: right;
+	letter-spacing: 2.5px;
+}

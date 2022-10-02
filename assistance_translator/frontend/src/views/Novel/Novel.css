@@ -1,0 +1,30 @@
+.novel-header{
+	display: flex;
+	height: 50px;
+	width: 100vw;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #333;
+	color: #eee;
+	padding: 15px;
+	font-size: 1.2em;
+}
+.novel-header button{
+	padding: 5px 10px;
+	background-color: #eee;
+	color: #222;
+	font-size: inherit;
+}
+
+.novel-navbar{
+	display: flex;
+	justify-content: space-around;
+	background-color: #777;
+	padding: 10px 20px;
+}
+.novel-navbar > div {
+	background-color: #444;
+	color: #eee;
+	padding: 5px 10px;
+	border-radius: 3px;
+}

@@ -1,0 +1,7 @@
+.auxbar{
+	background-color: #777;
+}
+.auxbar > div {
+	background-color: #121212;
+	color: #eee;
+}

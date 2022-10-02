@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="battle_field.js"></script>
+        <!--script src="library.js"></script-->
+        <style>
+            body{
+                margin: 0%;
+                height: 100%;
+            }
+            #control, img{
+                display: none;
+            }
+            #background{
+                width: 100vw;
+                height: 90vh;
+            }
+            .move{
+                width: 5vw;
+                position: absolute;
+                top: 90vh;
+            }
+            .left{left: 2.5vw;}
+            .right{left: calc( 17.5vw + 5vh );}
+            #backpack{
+                width: 7.5vw;
+                height: 7.5vh;
+                position: absolute;
+                top: 20vh;
+                right: 0;
+            }
+            canvas{
+                background-color: darkblue;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="delay">
+            
+            <button onclick="start()">
+                Start
+            </button>
+            <button onclick="quit()">
+                Quit
+            </button>
+            <img src="background.jpg" id="background">
+            <img src="ODD-move-Right.png" id="oddMoveR">
+            <img src="kankrelat.png" id="kankrelat">
+        </div>
+        <div id="control">
+            <button class="move left" onmousedown="moveleft()" onmouseup="stop()">Left</button>
+            <button class="move right" onmousedown="moveright()" onmouseup="stop()">Right</button>
+            <button id="backpack" onclick="openBackPack()">backpack</button>
+        </div>
+    </body>
+</html>

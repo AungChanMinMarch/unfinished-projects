@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Home</title>
+	</head>
+	<body>
+		<%= require('html-loader!./view/input.html').default %> <%=
+		require('html-loader!./view/input.html').default %>
+		<header>
+			<svg class="svg_icons btn" id="save" viewBox="0 0 24 24">
+				<use href="./img/icons_sprite.svg#save"></use>
+			</svg>
+			<div id="to_input_btn" class="btn">သွင်းမည်။</div>
+			<div id="to_peek_btn" class="btn">ကြည့်မည်။</div>
+			<div id="to_calc_btn" class="btn">စားမည်။</div>
+			<svg class="svg_icons btn" id="delete" viewBox="0 0 24 24">
+				<use href="./img/icons_sprite.svg#delete"></use>
+			</svg>
+		</header>
+		<div class="views">
+			<%= require('html-loader!./view/input.html').default %>
+		</div>
+	</body>
+</html>

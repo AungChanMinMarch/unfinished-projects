@@ -1,0 +1,23 @@
+.Ask{
+	font-size: 1.1rem;
+	padding: 5px 50px;
+}
+
+.askInput{
+	padding: 5px;
+	max-width: 600px;
+	width: 80%;
+	font-size: 1.2rem;
+}
+.checkboxContainer{
+	width: 90%;
+	max-width: 700px;
+	height: 70vh; 
+	overflow-y: scroll;
+}
+.ask-item{
+	background-color: #333;
+	margin: 4px;
+	padding: 6px;
+	border-radius: 3px;
+}

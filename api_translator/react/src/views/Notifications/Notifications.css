@@ -1,0 +1,23 @@
+.Notifications-header{
+	margin: 20px auto;
+}
+.NotiSlug{
+	text-decoration:  none;
+	color: #eee;
+	padding: 20px;
+
+	align-items: center;
+}
+.senderName{
+	font-size: 1.1rem;
+	font-weight: 700;
+	margin-right: 5px;
+}
+.senderEmail{
+	font-size: 0.9rem;
+	font-weight: 200;
+	margin-right: 5px;
+}
+.message{
+	font-size: 1rem;
+}

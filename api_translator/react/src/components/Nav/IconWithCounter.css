@@ -1,0 +1,20 @@
+.IconWithCounter{
+	position: relative;
+}
+.counter-container{
+	position: absolute;
+	top: -10%;
+	right: -5%;
+	color: #eee;
+	background-color: red;
+	border-radius: 50%;
+	width: 50%;
+	height: auto;
+	padding-top: 50%;
+}
+.counter{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

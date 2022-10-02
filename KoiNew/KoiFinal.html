@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="user-scalable=no" />
+    <style>
+      * {
+        margin: 0%;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100%;
+      }
+      #characterList,
+      img {
+        display: none;
+      }
+      #delay {
+        width: 100%;
+        display: grid;
+        justify-content: center;
+        align-content: space-evenly;
+      }
+      #delay button {
+        width: calc(25vw + 25vh);
+        height: 100%;
+        font-size: calc(4vw + 4vh);
+      }
+      #characterList {
+        width: 100%;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+      }
+      #characterList button {
+        width: 35%;
+        font-size: calc(1vw + 1vh + 1em);
+      }
+      canvas {
+        position: absolute;
+      }
+      #canvasesContainer {
+        top: 0;
+      }
+      button {
+        background-color: #000;
+        border: none;
+        filter: blur(1px);
+        color: #f1f1f1;
+        text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 40px #39ff14,
+          0 0 80px #39ff14, 0 0 160px #39ff14, 0 0 2px #2bc20e, 0 0 4px #2bc20e,
+          0 0 8px #2bc20e, 0 0 16px #2bc20e, 0 0 32px #2bc20e, 0 0 1px #0cb900,
+          0 0 2px #0cb900, 0 0 4px #0cb900, 0 0 8px #0cb900, 0 0 16px #0cb900;
+        box-shadow: 0 0 1px #39ff14 inset, 0 0 2px #39ff14 inset,
+          0 0 4px #39ff14 inset, 0 0 8px #39ff14 inset, 0 0 2px #2bc20e inset,
+          0 0 4px #2bc20e inset, 0 0 8px #2bc20e inset, 0 0 16px #2bc20e inset,
+          0 0 4px #0cb900 inset, 0 0 8px #0cb900 inset, 0 0 16px #0cb900 inset,
+          0 0 32px #0cb900 inset;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="delay">
+      <button onclick="showCharacter()">Start</button>
+      <button onclick="quit()">Quit</button>
+    </div>
+
+    <div id="characterList">
+      <button onclick="choose('bigSoldier')">Big Soldier</button>
+      <button onclick="eject()">Eki</button>
+      <button onclick="eject()">Lucy</button>
+    </div>
+
+    <div id="canvasesContainer"></div>
+
+    <div id="bigSoldier">
+      <img
+        alt=""
+        border="0"
+        data-original-height="176"
+        data-original-width="128"
+        src="https://1.bp.blogspot.com/-fwoE3zfzAeM/X8fOfHkH5sI/AAAAAAAARyA/WQEx6E3Qw0MvHT3l9cPNW3qBHv1oooH6wCPcBGAYYCw/s0/bigSoldier1.png"
+      />
+      <img
+        alt=""
+        border="0"
+        data-original-height="176"
+        data-original-width="128"
+        src="https://1.bp.blogspot.com/-8PbZhqbleNs/X8fOfIvvjKI/AAAAAAAARyA/rIeNHmDxtGI_HjyxyBdVKFoVG4e_KV2cgCPcBGAYYCw/s0/bigSoldier3.png"
+      />
+      <img
+        alt=""
+        border="0"
+        data-original-height="176"
+        data-original-width="128"
+        src="https://1.bp.blogspot.com/-kGGlpC0SE2U/X8fOfIlG48I/AAAAAAAARyA/uEW-rnWVYzgY-6KS7H-PUQbwL6JTEYy7wCPcBGAYYCw/s0/bigSoldier2.png"
+      />
+    </div>
+    <div id="Eki"></div>
+    <!-- TODO - add more character picture here -->
+    <div id="zombie">
+      <img
+        alt=""
+        border="0"
+        data-original-height="226"
+        data-original-width="128"
+        src="https://1.bp.blogspot.com/-Fyh88a5CLm4/X8fPHF36ZfI/AAAAAAAARyY/eDhDx0XP2-kLZhypF7rAVscBD8eiQSyIACPcBGAYYCw/s0/zombie1.png"
+      />
+      <img
+        alt=""
+        border="0"
+        data-original-height="226"
+        data-original-width="128"
+        src="https://1.bp.blogspot.com/-ta2hfLznHKk/X8fPHDpjbDI/AAAAAAAARyY/ylu79c9UoNg7oQgxXZpFmbiVbGbEowPwQCPcBGAYYCw/s0/zombie2.png"
+      />
+      <img
+        alt=""
+        border="0"
+        data-original-height="226"
+        data-original-width="128"
+        src="https://1.bp.blogspot.com/-FrZPK2HFlgY/X8fPHOBFb3I/AAAAAAAARyY/Ve3n6B3e6EQpSjjl-BjRR0eS9AtJhxFWACPcBGAYYCw/s0/zombie3.png"
+      />
+    </div>
+
+    <img
+      id="tower"
+      src="https://1.bp.blogspot.com/--NWkbhH2B5I/X8fPbAtpPII/AAAAAAAARyg/eMjUBounXng6xA1AmcpDIsa_hQ8kLkFmwCPcBGAYYCw/s0/tower.png"
+    />
+
+    <img
+      id="moon"
+      alt=""
+      border="0"
+      data-original-height="96"
+      data-original-width="128"
+      src="https://1.bp.blogspot.com/-9yszp7nvRZk/X8fWm3ntizI/AAAAAAAARy8/I_MsO25fIYct3CI0g8rr_I2-0GkrotgQgCPcBGAYYCw/s0/moon.png"
+    />
+
+    <img
+      id="background"
+      alt=""
+      border="0"
+      data-original-height="905"
+      data-original-width="1280"
+      src="https://1.bp.blogspot.com/-PVtv9vDrUDY/X8fWm9r6lGI/AAAAAAAARy8/6n2_XOOx0Zg5-F3Z_jQI8IDjzAWHPbfegCPcBGAYYCw/s0/background.png"
+    />
+  </body>
+  <script>
+    document.getElementById("delay").style.height =
+      screen.availHeight / 2 + "px";
+    //SECTION JS
+    // Find the right method, call on correct element
+    function launchFullScreen(element) {
+      if (element.requestFullScreen) {
+        element.requestFullScreen();
+      } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+      } else if (element.webkitRequestFullScreen) {
+        element.webkitRequestFullScreen();
+      }
+    }
+    function eject() {
+      alert("currently unavailable");
+    }
+    if (screen.width > screen.height) {
+      var w = screen.width;
+      var h = screen.height;
+    } else {
+      var w = screen.height;
+      var h = screen.width;
+    }
+    async function start(DOM) {
+      // await DOM.requestFullscreen();
+      await launchFullScreen(DOM);
+      await screen.orientation.lock("landscape");
+      if (screen.width > screen.height) {
+        w = screen.width;
+        h = screen.height;
+      } else {
+        w = screen.height;
+        h = screen.width;
+      }
+    }
+    // ANCHOR - variables
+
+    /* game variables*/
+    var container = document.getElementById("canvasesContainer");
+
+    var roadX = 0;
+    var droadX = 0;
+    var minRoadX = 0;
+    var maxRoadX = 6 * w;
+    var heroDisplayX = 0.4 * w;
+    var maxRoadLength = maxRoadX + w - heroDisplayX;
+    var heroMovementSpeed = w * 0.005;
+
+    var isBGmove = false;
+    var heroIsWalking = false;
+    var heroWalkingID;
+    var dlr = true;
+    /*monsters*/
+    var noOfZombies = 50;
+    var noOfTowers = 4;
+    /*characters*/
+    var hero;
+    var zombies = [];
+    var towers = [];
+    var witches = [];
+    var myGameObjs = [];
+
+    var bulletsLeft = 50;
+    var noOfBulletTrail = 4;
+    var bullets = [];
+    var moveRightBullet = createBullet(true, "Gold");
+    var moveLeftBullet = createBullet(false, "Gold");
+    /*Canvases*/
+    var sky = createCanvas(2);
+    sky.style.backgroundColor = "blue";
+    var background = createCanvas(3);
+    var game = createCanvas(4);
+    var canvasArr = [sky, background, game];
+    var myjoystick = createjoystick(
+      0.1 * w + 0.1 * h,
+      0.8 * h,
+      w * 0.024 + h * 0.01,
+      move,
+      stopMove,
+      true
+    );
+
+    /*context*/
+    var skyCtx = sky.getContext("2d");
+    var bgCtx = background.getContext("2d");
+    var gameCtx = game.getContext("2d");
+
+    //pictures
+    var moon = document.getElementById("moon");
+    var bg = document.getElementById("background");
+
+    function getDistance(x1, y1, x2, y2) {
+      var xDiff = x2 - x1;
+      var yDiff = y2 - y1;
+      return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+    }
+    //ANCHOR - predefined draw functions
+    //There are many canvases currently: sky(static background), background, game &  so on
+    //To create these canvases, this function is created
+    function createCanvas(zIndex) {
+      var canvas = document.createElement("canvas");
+      canvas.style.zIndex = zIndex.toString();
+      canvas.width = w;
+      canvas.height = h;
+      return canvas;
+    }
+    function myDrawImage2(ctx, img, x, y, w, h) {
+      for (let i = 2; i < arguments.length; i++) {
+        arguments[i] = Math.floor(arguments[i]);
+      }
+      ctx.drawImage(img, x, y, w, h);
+    }
+    function myDrawImage3(ctx, img, sx, sy, sw, sh, x, y, w, h) {
+      for (let i = 2; i < arguments.length; i++) {
+        arguments[i] = Math.floor(arguments[i]);
+      }
+      ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+    }
+    function drawFlip2(ctx, img, x, y, w, h) {
+      ctx.save();
+      ctx.translate(x + w, y);
+      ctx.scale(-1, 1);
+      myDrawImage2(ctx, img, 0, 0, w, h);
+      ctx.restore();
+    }
+    function createHPbar(currentHP, totalHP, width, color1, color2) {
+      var canvas = document.createElement("canvas");
+      var ctx = canvas.getContext("2d");
+      // Create gradient
+      var grd = ctx.createLinearGradient(0, 0, 0, 10);
+      grd.addColorStop(0, color1);
+      grd.addColorStop(0.5, color2);
+      grd.addColorStop(1, "black");
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, 0, (width * currentHP) / totalHP, 10);
+
+      ctx.lineWidth = 2;
+      ctx.strokeRect(0, 0, width, 10);
+
+      return canvas;
+    }
+    /**
+     * @param {...number} damage
+     * @param {...boolean} isTrueDamage
+     * @param {boolean} [foo] isPhysical
+     */
+    function drawDamageText(damage, x, y, w, h, isTrueDamage, isPhysical) {
+      let canvas = createCanvas(4);
+      let ctx = canvas.getContext("2d");
+      addDamageTextToCanvas(ctx, damage, x, y, w, h, isTrueDamage, isPhysical);
+      container.appendChild(canvas);
+      setTimeout(function () {
+        canvas.remove();
+      }, 500);
+    }
+    function addDamageTextToCanvas(
+      ctx,
+      damage,
+      x,
+      y,
+      w,
+      h,
+      isTrueDamage,
+      isPhysical
+    ) {
+      ctx.clearRect(0, 0, screen.width, screen.height);
+      ctx.font = "20px Arial";
+      // ctx.lineWidth = 4;
+      // ctx.strokeStyle = "black";
+      // ctx.strokeText(bulletsLeft, 0.01 * w, 0.09 * w);
+      ctx.fillStyle = "white";
+      ctx.shadowColor = "darkred";
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.shadowBlur = 10;
+      ctx.fillText(damage, x + 0.5 * w, y + 0.5 * h);
+    }
+    function removeDamageText(obj, x) {
+      clearTimeout(x);
+      return setTimeout(function () {
+        obj.damageTextCtx.clearRect(0, 0, screen.width, screen.height);
+        obj.damageText = 0;
+      }, 1000);
+    }
+    function stopChasing(obj, id) {
+      clearTimeout(id);
+      return setTimeout(function () {
+        obj.isChasing = false;
+      }, 2000);
+    }
+    function drawBG(img, x, w, h) {
+      var displayWidth = 0;
+      var displayHeight = h;
+      var displayX = x;
+      bgCtx.clearRect(0, 0, background.width, background.height);
+      do {
+        var remainingWidth = w - displayX;
+        var actualWidth;
+        var actualHeight = img.height;
+
+        // var actualX = displayX == 0 ? this.sx % this.width : 0;
+        var actualX =
+          displayX == 0
+            ? ((roadX * img.height) / screen.height) % img.width
+            : 0;
+
+        actualWidth =
+          displayX == 0
+            ? img.width - actualX
+            : remainingWidth * (actualHeight / displayHeight);
+        if (actualWidth > img.width) actualWidth = img.width;
+
+        var displayWidth = actualWidth * (displayHeight / img.height);
+        myDrawImage3(
+          bgCtx,
+          img,
+          actualX,
+          0,
+          actualWidth,
+          actualHeight,
+          displayX,
+          0,
+          displayWidth,
+          displayHeight
+        );
+        displayX += displayWidth;
+      } while (displayX < w);
+    }
+
+    //ANCHOR - move functions
+    function move(centerX, centerY, movedX, movedY) {
+      if (moveTopLeft(centerX, movedX)) {
+        droadX = -heroMovementSpeed;
+        hero.dx = -heroMovementSpeed;
+        dlr = false;
+      } else if (moveBotRight(centerX, movedX)) {
+        droadX = heroMovementSpeed;
+        hero.dx = heroMovementSpeed;
+        dlr = true;
+      } else {
+        droadX = 0;
+        hero.dx = 0;
+      }
+
+      if (moveTopLeft(centerY, movedY)) hero.dy = -screen.height * 0.01;
+      else if (moveBotRight(centerY, movedY)) hero.dy = screen.height * 0.01;
+      else hero.dy = 0;
+
+      if (!heroIsWalking) {
+        heroIsWalking = true;
+        heroWalkingID = setInterval(function () {
+          hero.no = hero.no < 2 ? hero.no + 1 : 0;
+        }, 75);
+      }
+    }
+    function moveTopLeft(center, moved) {
+      if (center - moved > (w + h) / 100) return true;
+      return false;
+    }
+    function moveBotRight(center, moved) {
+      if (moved - center > (w + h) / 100) return true;
+      return false;
+    }
+    function stopMove() {
+      droadX = 0; //to prevent start moving on mouseDoen (except first time)
+      hero.dx = 0;
+      hero.dy = 0;
+      clearInterval(heroWalkingID);
+      hero.no = 0;
+      heroIsWalking = false;
+    }
+
+    //ANCHOR - predefined objects
+    function character(
+      displayX,
+      displayY,
+      displayHeight,
+      dx,
+      dy,
+      imgContainerID
+    ) {
+      this.dx = dx;
+      this.dy = dy;
+      /*coordinates in canvas*/
+      this.displayX = displayX;
+      this.roadX = displayX;
+      this.displayY = displayY - displayHeight;
+
+      this.imgs = document.getElementById(imgContainerID).children;
+      this.displayHeight = displayHeight;
+      this.displayWidth =
+        (this.displayHeight * this.imgs[0].width) / this.imgs[0].height;
+
+      this.footY = this.displayY + this.displayHeight;
+      this.no = 0; //first position
+      this.totalHP = 1200;
+      this.currentHP = 1200;
+      this.hpBar = createHPbar(
+        this.currentHP,
+        this.totalHP,
+        this.displayWidth * 0.9,
+        "limegreen",
+        "green"
+      );
+      var damageTextCanvas = createCanvas(4);
+      container.appendChild(damageTextCanvas);
+      this.damageTextCtx = damageTextCanvas.getContext("2d");
+      this.damageText = 0;
+      this.update = function () {
+        //TODO fix this bug
+        this.roadX += this.dx;
+        if (this.roadX <= 0) {
+          this.roadX = 0;
+          if (this.dx < 0) this.dx = 0;
+        } else if (this.roadX + this.displayWidth >= maxRoadLength) {
+          this.roadX = maxRoadLength - this.displayWidth;
+          if (this.dx > 0) this.dx = 0;
+        }
+        this.displayX = this.roadX - roadX;
+
+        if (
+          (this.footY <= screen.height * 0.53 && hero.dy < 0) ||
+          (this.footY >= screen.height && hero.dy > 0)
+        )
+          this.dy = 0;
+        this.displayY += this.dy;
+        this.footY = this.displayY + this.displayHeight;
+      };
+      this.updateHP = function (damage) {
+        this.currentHP -= damage;
+        if (this.damageText != 0) this.damageText += damage;
+        else this.damageText = damage;
+        addDamageTextToCanvas(
+          this.damageTextCtx,
+          this.damageText,
+          this.displayX,
+          this.displayY,
+          this.displayWidth,
+          this.displayHeight,
+          false,
+          true
+        );
+        x = removeDamageText(this, x);
+        this.hpBar = createHPbar(
+          this.currentHP,
+          this.totalHP,
+          this.displayWidth * 0.9,
+          "limegreen",
+          "green"
+        );
+      };
+      this.draw = function () {
+        if (dlr) {
+          gameCtx.drawImage(this.hpBar, this.displayX - 10, this.displayY - 10);
+          myDrawImage2(
+            gameCtx,
+            this.imgs[this.no],
+            this.displayX,
+            this.displayY,
+            this.displayWidth,
+            this.displayHeight
+          );
+        } else {
+          gameCtx.drawImage(this.hpBar, this.displayX + 10, this.displayY - 10);
+          drawFlip2(
+            gameCtx,
+            this.imgs[this.no],
+            this.displayX,
+            this.displayY,
+            this.displayWidth,
+            this.displayHeight
+          );
+        }
+      };
+      this.attack = function () {
+        eval(imgContainerID + "Attack()");
+      };
+    }
+    function zombie(displayX, displayY, height, imgContainerID) {
+      this.moveX = true;
+      this.moveY = true;
+      this.canGiveDamage = true;
+      this.displayX = displayX;
+      this.roadX = displayX;
+      this.displayY = displayY - height;
+
+      this.dx = -((-w / (50 * h)) * (height - 0.15 * h) + (5 * w) / 2500);
+      this.dy = this.dx;
+
+      this.imgs = document.getElementById(imgContainerID).children;
+      this.displayHeight = height;
+      this.displayWidth =
+        (this.displayHeight * this.imgs[0].width) / this.imgs[0].height;
+
+      this.footY = this.displayY + this.displayHeight;
+      this.no = 0; //first position
+      this.dlr = false; //moving toward to hero, which means right to left
+      this.isChasing = false; //will chase after first attacking
+
+      this.totalHP = (9000 / h) * (height - 0.15 * h) + 300;
+      this.currentHP = this.totalHP;
+      this.hpBar = createHPbar(
+        this.currentHP,
+        this.totalHP,
+        this.displayWidth,
+        "red",
+        "darkred"
+      );
+      this.stayInsideGame = function () {
+        if (
+          this.roadX <= 0 ||
+          this.roadX + this.displayWidth >= maxRoadLength
+        ) {
+          this.dx = -this.dx;
+          this.dlr = !this.dlr;
+        }
+        if (this.footY >= h || this.footY <= h * 0.53) this.dy = -this.dy;
+      };
+      this.update = function () {
+        // return true(if Display on screen) and false (else)
+        if (this.isChasing) {
+          //Chase with high speed(movement)
+          this.roadX += this.dx * 0.5 + w / 1000;
+          this.displayY += this.dy * 0.5 + w / 4000;
+        } else {
+          //walk with normal speed
+          this.roadX += this.dx;
+          this.displayY += this.dy;
+        }
+
+        this.displayX = this.roadX - roadX;
+        this.footY = this.displayY + this.displayHeight;
+
+        if (this.displayX >= 0 && this.displayX + this.displayWidth < w) {
+          //if Display on screen => return true
+          if (
+            getDistance(this.displayX, this.footY, hero.displayX, hero.footY) <=
+            (w * 0.25 + h * 0.12) / 2
+          ) {
+            //if hero is near Zombie, Zombie walk toward hero
+            if (this.displayX < hero.displayX) {
+              this.dx = Math.abs(this.dx);
+              this.dlr = true;
+            } else if (this.displayX > hero.displayX) {
+              this.dx = -Math.abs(this.dx);
+              this.dlr = false;
+            }
+            if (this.footY < hero.footY) this.dy = Math.abs(this.dy);
+            else if (this.footY > hero.footY) this.dy = -Math.abs(this.dy);
+          } else this.stayInsideGame();
+          return true;
+        } else this.stayInsideGame();
+        return false;
+      };
+      this.updateHP = function (damage) {
+        this.currentHP -= damage;
+        drawDamageText(
+          damage,
+          this.displayX,
+          this.displayY,
+          this.displayWidth,
+          this.displayHeight,
+          false,
+          true
+        );
+        this.hpBar = createHPbar(
+          this.currentHP,
+          this.totalHP,
+          this.displayWidth,
+          "red",
+          "darkred"
+        );
+      };
+      this.draw = function () {
+        if (!this.dlr) {
+          gameCtx.drawImage(this.hpBar, this.displayX + 10, this.displayY - 5);
+          myDrawImage2(
+            gameCtx,
+            this.imgs[this.no],
+            this.displayX,
+            this.displayY,
+            this.displayWidth,
+            this.displayHeight
+          );
+        } else {
+          gameCtx.drawImage(this.hpBar, this.displayX - 10, this.displayY - 5);
+          drawFlip2(
+            gameCtx,
+            this.imgs[this.no],
+            this.displayX,
+            this.displayY,
+            this.displayWidth,
+            this.displayHeight
+          );
+        }
+      };
+      this.attack = function () {
+        if (hero.footY - this.footY < 25) {
+          if (hero.displayX <= this.displayX) {
+            if (hero.displayX + hero.displayWidth >= this.displayX) {
+              hero.updateHP(100);
+              this.canGiveDamage = false;
+              this.isChasing = true;
+              if (typeof id == "undefined") var id = null;
+              id = stopChasing(this, id);
+              return true;
+            }
+          } else {
+            if (this.displayX + this.displayWidth >= hero.displayX) {
+              hero.updateHP(100);
+              this.canGiveDamage = false;
+              this.ischasing = true;
+              if (typeof id == "undefined") var id = null;
+              id = stopChasing(this, id);
+              return true;
+            }
+          }
+        }
+        return false;
+      };
+    }
+
+    //ANCHOR - bigSoldier
+    function bigSoldier() {
+      var canvas = document.createElement("canvas");
+      canvas.style.zIndex = 5;
+      var ctx = canvas.getContext("2d");
+
+      canvas.width = 0.1 * w;
+      canvas.height = 0.1 * w;
+      canvas.style.position = "absolute";
+      canvas.style.right = 0.1 * w + "px";
+      canvas.style.bottom = 0.1 * w + "px";
+
+      shotLaserArrow(canvas, ctx);
+      setInterval(function () {
+        if (bulletsLeft < 50) {
+          bulletsLeft++;
+          shotLaserArrow(canvas, ctx);
+        }
+      }, 5000);
+      canvas.addEventListener(
+        "click",
+        () => {
+          bulletsLeft--;
+          if (bulletsLeft >= 0) {
+            bullets.push(new bullet());
+            shotLaserArrow(canvas, ctx);
+          }
+        },
+        false
+      );
+
+      return canvas;
+    }
+    function createBullet(moveRight, color) {
+      var canvas = document.createElement("canvas");
+      var ctx = canvas.getContext("2d");
+      ctx.fillStyle = color;
+      for (let i = noOfBulletTrail; i > 0; i--) {
+        ctx.globalAlpha = moveRight
+          ? 1 - 0.15 * i
+          : 1 - 0.15 * (noOfBulletTrail - i);
+
+        ctx.beginPath();
+        ctx.arc(6 * noOfBulletTrail - 5 * i, 5, 3, 0, 2 * Math.PI, false);
+        ctx.fill();
+        ctx.closePath();
+      }
+      return canvas;
+    }
+    function bullet() {
+      this.displayX = dlr
+        ? hero.displayX + 0.7 * hero.displayWidth
+        : hero.displayX;
+      this.displayY = hero.displayY + 0.37 * hero.displayHeight;
+      this.footY = hero.footY;
+      this.dx = dlr ? heroMovementSpeed * 2 : -heroMovementSpeed * 2;
+      this.absolutedx = Math.abs(this.dx);
+      this.displacement = 0;
+
+      this.img = dlr ? moveRightBullet : moveLeftBullet;
+      this.damage = 500;
+      this.update = function () {
+        this.displayX += this.dx;
+        this.displayX -= droadX;
+        this.displacement += this.absolutedx;
+      };
+      this.draw = function () {
+        gameCtx.drawImage(this.img, this.displayX, this.displayY);
+      };
+    }
+    function shotLaserArrow(canvas, ctx) {
+      var center = 0.05 * w;
+      var r = 0.04 * w;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.beginPath();
+      var grd = ctx.createRadialGradient(center, center, 0, center, center, r);
+      // Light color
+      grd.addColorStop(0, "red");
+      // Dark color
+      grd.addColorStop(1, "#330000");
+      ctx.arc(center, center, r, 0, 2 * Math.PI, false);
+      ctx.fillStyle = grd;
+      ctx.fill();
+
+      ctx.font = "20px Arial";
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = "black";
+      ctx.strokeText(bulletsLeft, 0.01 * w, 0.09 * w);
+      ctx.fillStyle = "white";
+      ctx.fillText(bulletsLeft, 0.01 * w, 0.09 * w);
+    }
+    function bigSoldierAttack() {
+      if (bullets.length > 0) {
+        for (let i = 0; i < bullets.length; i++) {
+          bullets[i].update();
+          if (bullets[i].displacement <= screen.width) {
+            myGameObjs.push(bullets[i]);
+          } else bullets.splice(i, 1);
+        }
+        for (let i = 0; i < bullets.length; i++) {
+          for (let j = 0; j < zombies.length; j++) {
+            if (bullets[i].displayX >= zombies[j].displayX)
+              if (
+                bullets[i].displayX <=
+                zombies[j].displayX + zombies[j].displayWidth
+              )
+                if (Math.abs(bullets[i].footY - zombies[j].footY) < 25) {
+                  zombies[j].updateHP(bullets[i].damage);
+                  bullets.splice(i, 1);
+
+                  if (zombies[j].currentHP <= 0) {
+                    zombies.splice(j, 1);
+                  }
+                  break;
+                }
+          }
+        }
+      }
+    }
+    //ANCHOR -joystick
+    function createjoystick(
+      centerX,
+      centerY,
+      internalRadius,
+      doThis,
+      stopThis,
+      autoReturnToCenter
+    ) {
+      let canvas = document.createElement("canvas");
+      canvas.style.zIndex = 5;
+      let ctx = canvas.getContext("2d");
+
+      canvas.width = screen.width;
+      canvas.height = screen.height;
+
+      // Used to save current position of stick
+      var movedX = centerX;
+      var movedY = centerY;
+
+      var maxmove = (internalRadius * 3) / 4;
+      var externalRadius = internalRadius * 2;
+
+      var autoReturnToCenter = "undefined" ? true : autoReturnToCenter;
+
+      var pressed = false;
+
+      function drawExternal() {
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, externalRadius, 0, 2 * Math.PI, false);
+        // context.lineWidth = externalLineWidth;
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "#000033";
+        ctx.stroke();
+      }
+      function drawInternal() {
+        ctx.beginPath();
+        if (centerX - movedX > maxmove) {
+          movedX = centerX - maxmove;
+        }
+        if (movedX - centerX > maxmove) {
+          movedX = centerX + maxmove;
+        }
+        if (centerY - movedY > maxmove) {
+          movedY = centerY - maxmove;
+        }
+        if (movedY - centerY > maxmove) {
+          movedY = centerY + maxmove;
+        }
+        ctx.arc(movedX, movedY, internalRadius, 0, 2 * Math.PI, false);
+        // create radial gradient
+        var grd = ctx.createRadialGradient(
+          movedX,
+          movedY,
+          0,
+          movedX,
+          movedY,
+          internalRadius
+        );
+        // Light color
+        grd.addColorStop(0, "#3333ff");
+        // Dark color
+        grd.addColorStop(1, "#000033");
+        ctx.fillStyle = grd;
+        ctx.fill();
+        // context.lineWidth = internalLineWidth;
+        // context.strokeStyle = internalStrokeColor;
+        // ctx.stroke();
+      }
+      function draw() {
+        // Delete canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Redraw object
+        drawExternal();
+        drawInternal();
+      }
+
+      /* Drawing for the first time*/
+      draw();
+
+      //adding events
+      // Check if the device support the touch or not
+      if ("ontouchstart" in document.documentElement) {
+        canvas.addEventListener("touchstart", onTouchStart, false);
+        canvas.addEventListener("touchmove", onTouchMove, false);
+        canvas.addEventListener("touchend", stopJoy, false);
+      } else {
+        canvas.addEventListener("mousedown", onMouseDown, false);
+        canvas.addEventListener("mousemove", onMouseMove, false);
+        canvas.addEventListener("mouseup", stopJoy, false);
+      }
+
+      function onMouseDown(event) {
+        // Manage offset
+        movedX = event.pageX;
+        movedY = event.pageY;
+        // Manage offset
+        if (canvas.offsetParent.tagName.toUpperCase() === "BODY") {
+          movedX -= canvas.offsetLeft;
+          movedY -= canvas.offsetTop;
+        } else {
+          movedX -= canvas.offsetParent.offsetLeft;
+          movedY -= canvas.offsetParent.offsetTop;
+        }
+
+        if (
+          Math.sqrt((movedX - centerX) ** 2 + (movedY - centerY) ** 2) <=
+          externalRadius
+        ) {
+          draw();
+          doThis(centerX, centerY, movedX, movedY);
+          pressed = true;
+          onMouseMove(event);
+        }
+      }
+      function onTouchStart(event) {
+        if (
+          Math.sqrt(
+            (event.targetTouches[0].pageX - centerX) ** 2 +
+              (event.targetTouches[0].pageY - centerY) ** 2
+          ) <= externalRadius
+        ) {
+          pressed = true;
+          onTouchMove(event);
+        }
+      }
+      function onMouseMove(event) {
+        if (pressed) {
+          isBGmove = true;
+          movedX = event.pageX;
+          movedY = event.pageY;
+          // Manage offset
+          if (canvas.offsetParent.tagName.toUpperCase() === "BODY") {
+            movedX -= canvas.offsetLeft;
+            movedY -= canvas.offsetTop;
+          } else {
+            movedX -= canvas.offsetParent.offsetLeft;
+            movedY -= canvas.offsetParent.offsetTop;
+          }
+          draw();
+          doThis(centerX, centerY, movedX, movedY);
+        }
+      }
+      function onTouchMove(event) {
+        if (pressed) {
+          isBGmove = true;
+          movedX = event.targetTouches[0].pageX;
+          movedY = event.targetTouches[0].pageY;
+          // Manage offset
+          if (canvas.offsetParent.tagName.toUpperCase() === "BODY") {
+            movedX -= canvas.offsetLeft;
+            movedY -= canvas.offsetTop;
+          } else {
+            movedX -= canvas.offsetParent.offsetLeft;
+            movedY -= canvas.offsetParent.offsetTop;
+          }
+          draw();
+          doThis(centerX, centerY, movedX, movedY);
+        }
+      }
+      function stopJoy(event) {
+        pressed = false;
+        isBGmove = false;
+        stopThis();
+        if (autoReturnToCenter) {
+          movedX = centerX;
+          movedY = centerY;
+          draw();
+        }
+      }
+      return canvas;
+    }
+
+    //ANCHOR User input start
+    function showCharacter() {
+      document.getElementById("delay").style.display = "none";
+      let charList = document.getElementById("characterList");
+      charList.style.display = "flex";
+      charList.style.height = screen.availHeight / 2 + "px";
+    }
+    function quit() {
+      alert("bye");
+    }
+    function choose(element) {
+      try {
+        document.getElementsByTagName("h3")[0].remove();
+      } finally {
+        skillIcons = eval(element + "(" + ")");
+        document.getElementById("characterList").style.display = "none";
+
+        start(container);
+        container.appendChild(myjoystick);
+        container.appendChild(skillIcons);
+        for (let i = 0; i < canvasArr.length; i++) {
+          container.appendChild(canvasArr[i]);
+        }
+
+        //creating hero
+        hero = new character(heroDisplayX, h * 0.7, h / 5, 0, 0, element);
+        for (let i = 0; i < noOfZombies; i++) {
+          x =
+            heroDisplayX * 2 +
+            Math.random() * (maxRoadLength - heroDisplayX * 2);
+          y = Math.random() * 0.5 * h + 0.5 * h;
+          height = 0.15 * h + Math.random() * 0.1 * h; //a+(b-a)x;a=0.15h;b=0.25h
+          zombies.push(new zombie(x, y, height, "zombie"));
+        }
+        var zombieWalkID = setInterval(function () {
+          if (zombies.length > 0) {
+            for (let i = 0; i < zombies.length; i++) {
+              zombies[i].moveX = true;
+              zombies[i].moveY = true;
+              // zombies[i].moveX =
+              //     Math.floor(Math.random() * 2) == 0
+              //         ? true
+              //         : false;
+              // zombies[i].moveY =
+              //     Math.floor(Math.random() * 2) == 0
+              //         ? true
+              //         : false;
+              // if (zombies[i].moveX || zombies[i].moveY)
+              zombies[i].no = zombies[i].no < 2 ? zombies[i].no + 1 : 0;
+            }
+          } else {
+            clearInterval(zombieWalkID);
+          }
+        }, 200);
+        drawGame();
+      }
+    }
+    function drawGame() {
+      canvasArr.forEach((canvas) => {
+        canvas.width = w;
+        canvas.height = h;
+      });
+      //TODO resize and reposition characters
+      //TODO resize and reposition joystick
+
+      // drawing moon
+      skyCtx.clearRect(0, 0, sky.width, sky.height);
+      skyCtx.drawImage(moon, w * 0.15, 0);
+
+      // drawing building and road (for the first time)
+      // moving building and road is drawn inside joystick
+      drawBG(bg, 0, innerWidth, h);
+
+      animateGame();
+    }
+    //ANCHOR - animation
+    function animateGame() {
+      if (isBGmove) {
+        if (hero.roadX > heroDisplayX && hero.roadX < maxRoadX) {
+          roadX += droadX;
+        }
+        roadX = roadX < 0 ? 0 : roadX > maxRoadX ? maxRoadX : roadX;
+        drawBG(bg, 0, innerWidth, screen.height);
+      }
+
+      gameCtx.clearRect(0, 0, game.width, game.height);
+      myGameObjs = [];
+
+      hero.update();
+      hero.attack();
+      myGameObjs.push(hero);
+
+      for (let i = 0; i < zombies.length; i++) {
+        let willDisplay = zombies[i].update();
+        if (willDisplay) {
+          myGameObjs.push(zombies[i]);
+          if (zombies[i].canGiveDamage)
+            if (zombies[i].attack())
+              setTimeout(function () {
+                zombies[i].canGiveDamage = true;
+              }, 200);
+        }
+      }
+      //     for (let i = 0; i < towers.length; i++) {
+      //         towers[i].update();
+      //         myGameObjs.push(towers[i]);
+      //     }
+
+      //the following codes fix zombie and hero stack error
+      myGameObjs.sort(function (a, b) {
+        return a.footY - b.footY;
+      });
+      for (let i = 0; i < myGameObjs.length; i++) {
+        myGameObjs[i].draw();
+      }
+
+      if (zombies.length > 0) window.requestAnimationFrame(animateGame);
+      else alert("congratulation! You won");
+    }
+  </script>
+</html>

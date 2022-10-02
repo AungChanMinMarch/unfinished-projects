@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style/app.css" />
+    <title>app</title>
+  </head>
+  <body>
+    <div class="page-change-bar">
+      <div class="save" onclick="save()">
+        <img src="icon/save.svg" alt="save icon" />
+      </div>
+      <div onclick="change('input-page')">သွင်းမည်။</div>
+      <div onclick="change('peek-page')">ကြည့်မည်။</div>
+      <div onclick="change('calc-page')">စားမည်။</div>
+      <div class="delete" onclick="clearAll()">
+        <img src="icon/sheet.svg" alt="sheet icon" />
+      </div>
+    </div>
+
+    <div class="page-container">
+      <div class="page" id="input-page">
+        <div id="input-display">
+          <table>
+            <tbody id="input-tbody"></tbody>
+          </table>
+        </div>
+        <div id="keyboard">
+          <button>7</button>
+          <button>8</button>
+          <button>9</button>
+          <button class="multi-input" data-input="ap">အပူး</button>
+          <button class="line-input" data-input="t">ထိပ်</button>
+          <button class="single-input">R</button>
+
+          <button>4</button>
+          <button>5</button>
+          <button>6</button>
+          <button class="multi-input" data-input="pw">ပါဝါ</button>
+          <button class="line-input" data-input="p">ပိတ်</button>
+          <button class="single-input">D</button>
+
+          <button>1</button>
+          <button>2</button>
+          <button>3</button>
+          <button class="multi-input" data-input="nk">နက္ခတ်</button>
+          <button class="line-input" data-input="b">ဘရိတ်</button>
+          <button class="single-input">။</button>
+
+          <button>0</button>
+          <button id="del">DEL</button>
+
+          <button class="multi-input" data-input="sp">ရှမ်းပူး</button>
+          <button class="line-input" data-input="a">အပါ</button>
+          <button class="single-input enter">၀၀</button>
+
+          <button class="enter">Enter</button>
+        </div>
+      </div>
+      <div class="page" id="peek-page">
+        <div id="peek-nav"></div>
+
+        <div id="peek-display">
+          <table>
+            <tbody id="peek-tbody"></tbody>
+          </table>
+        </div>
+
+        <script>
+          for (let i = 0; i < 10; i++) {
+            const anchor = document.createElement("a");
+            anchor.href = "#peek" + i + "0";
+            anchor.innerHTML = i;
+            document.getElementById("peek-nav").appendChild(anchor);
+          }
+          function writePeekTbody() {
+            for (let i = 0; i < 10; i++) {
+              for (let j = 0; j < 10; j++) {
+                let tr = document.createElement("tr");
+                document.getElementById("peek-tbody").appendChild(tr);
+
+                const td = document.createElement("td");
+                tr.appendChild(td);
+                td.innerHTML = i.toString() + j;
+
+                const tdMoney = document.createElement("td");
+                tr.appendChild(tdMoney);
+                tdMoney.id = "peek" + i + j;
+                tdMoney.innerHTML = "0";
+              }
+            }
+          }
+        </script>
+      </div>
+      <div class class="page" id="calc-page">
+        <div class="flex-sticky-box">
+          <div>total</div>
+          <div id="total">0</div>
+          <div>Rate?</div>
+          <input type="number" name="rate" id="rate" />
+          <div>send</div>
+          <div id="send">0</div>
+          <div>eat</div>
+          <div id="eat">0</div>
+        </div>
+        <button id="calc-OKbtn">Calc</button>
+        <div>average</div>
+        <div>0</div>
+        <table id="show-result">
+          <tbody id="calc-tbody"></tbody>
+        </table>
+        <a
+          href="data:application/xml;charset=utf-8,your code here"
+          download="filename.html"
+          >Save</a
+        >
+      </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-auth.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyCGbUciRV6WMRjf64nqhvlwBtL1isQSKdw",
+        authDomain: "myparents-301513.firebaseapp.com",
+        databaseURL: "https://myparents-301513-default-rtdb.firebaseio.com",
+        projectId: "myparents-301513",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // make auth and firestore references
+      const auth = firebase.auth();
+      //   const db = firebase.firestore();
+
+      //   // update firestore settings
+      //   db.settings({ timestampsInSnapshots: true });
+
+      var myWindow;
+      auth.onAuthStateChanged((user) => {
+        if (!user) {
+          if (document.body.matches("#login-page")) return;
+          window.open = "http://192.168.100.6:5500/login.html";
+        }
+      });
+    </script>
+    <script src="script/app.js"></script>
+    <script src="script/2d-library.js"></script>
+  </body>
+</html>

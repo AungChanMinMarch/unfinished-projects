@@ -1,0 +1,19 @@
+.Input{
+	width: 100%;
+	max-width: 400px;
+}
+.Input{
+	display: flex;
+	flex-direction: column;
+	margin: 15px auto;
+}
+.Input > label{
+	color: var(--main-color);
+	font-size: 1.1rem;
+	letter-spacing: 1.1px;
+}
+.Input > input{
+	padding: 5px 10px;
+	font-size: 1.1rem;
+	border-radius: 5px;
+}

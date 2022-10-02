@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How To Build Code Playground</title>
+  </head>
+  <body>
+    <section>
+      <table>
+        <tr>
+          <td>Difficulty</td>
+          <td>Easy(beginner level)</td>
+        </tr>
+        <tr>
+          <td>HTML used</td>
+          <td>
+            <code> &lt;textarea&gt;</code>,
+            <code>&lt;iframe&gt;</code> placeholder,
+          </td>
+        </tr>
+        <tr>
+          <td>CSS used</td>
+          <td>grid, repeat</td>
+        </tr>
+        <tr>
+          <td>JS used</td>
+          <td>onkeyup event, element.contentWindow.document</td>
+        </tr>
+      </table>
+    </section>
+
+    <hr />
+
+    I wanted to create <strong>Code Playground</strong> like on
+    <a href="https://www.w3schools.com/">w3schools</a> which is a good place to
+    learn coding.
+
+    <p>
+      First create a div for <strong>Code Playground</strong>. In that div,
+      there should have two child div(one for coding and the other for result.)
+      In coding area,there should be there textarea (html,css, js)
+    </p>
+
+    <!-- add some css styling -->
+
+    <hr />
+
+    <code-snippet data-focus="html">
+      <div data-type="html">
+        <span slot="red"> save mandalay </span>
+      </div>
+      <div data-type="js">console.log(console)</div>
+    </code-snippet>
+  </body>
+</html>

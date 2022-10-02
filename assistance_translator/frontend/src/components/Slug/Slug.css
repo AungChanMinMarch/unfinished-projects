@@ -1,0 +1,13 @@
+.slug{
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 20px;
+	margin: 5px 10px;
+	border-radius: 5px;
+	background-color: #123456;
+	align-items: center;
+}
+.slug > * {
+	color: #eee;
+	background-color: transparent;
+}

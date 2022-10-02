@@ -1,0 +1,56 @@
+.chapter{
+	--mainBgColor:  #222;
+	--bgColor:  #444;
+	--color:  #eee;
+	--toolbar-h:  50px;
+	--small-auxbar-h: 50px;
+	--page-h: calc(100vh - var(--toolbar-h));
+	--large-page-h:  calc(100vh - var(--toolbar-h) - var(--small-auxbar-h));
+	--small-page-h:  30vh;
+
+	display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.flexbar{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	height: 50px;
+}
+.flexbar > div{
+	text-align: center;
+	padding: 5px 10px;
+}
+
+.page{
+	background-color: var(--mainBgColor);
+	padding: 10px 5px;
+	overflow: scroll;
+	height: var(--page-h);
+}
+.page.large{
+	height: var(--large-page-h);
+}
+.page.small{
+	height: var(--small-page-h);
+}
+.sentence{
+	background-color: var(--bgColor);
+	margin: 5px;
+	padding: 3px 6px;
+}
+.sentence.active{
+	background-color: blue;
+}
+.word{
+	display: inline-block;
+	margin: 2px 4px;
+	padding: 2px 4px;
+	background-color: #eee;
+	color: #000;
+}
+.word.active{
+	background-color: red;
+	color: #eee;
+}

@@ -1,0 +1,19 @@
+.Desktop{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.EngScreen{
+    flex: 1 1 auto;
+}
+.Toolsbar{
+    flex: 0 0 50px;
+    background-color: var(--sec-color);
+    color: var(--sec-bgColor);
+    height: 60px;
+}
+.Toolsbar > img{
+    background-color: #000;
+    border-radius: 5px;
+    height: 100%;
+}

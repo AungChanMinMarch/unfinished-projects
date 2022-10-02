@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Basic Concepts of Pythons</title>
+		<style>
+			div.code{ font-family:"Courier New", Courier, monospace;}
+			div.output{ font-family: "Courier New", 'Courier New', Courier, monospace; background-color: black; color:whitesmoke}
+			i{color : blue, font-weight:500;}
+			c{font-family: "Courier New", Courier, monospace; font-weight:300}
+		</style>
+	</head>
+
+	<body>
+		<section>
+			<h3>What is <b>Python</b>?</h3>
+			<p>Python is high-level programming language. It has been used in numerous areas, including <i>web programming</i>, 
+				<i>scripting</i>, <i>scientific computing</i>, and <i>artifical intelligence</i>. 
+				There are three major versions of Python. They are Python1.x, Python2.x and Python3.x <br/>
+				Let's start learning Python. You need to write yourself and run the code. <i>NEVER EVER</i> copy and paste the code. </p>
+		</section>
+		
+		<section class="My First Program">
+			<h3>Your First Program</h3>
+			<p>Just like other programming languages, Let's start with "Hello World !" program. </p>
+			<h4>What is "Hello World Program"?</h4>
+			<p>
+				It is the first program in <i>nearly every</i> programming language for every programmer.
+				It displays the words, "Hello World".  It doesn't really print anything on the paper. In Python, it looks like this:
+				<div class="code">
+					print("Hello World")
+				</div>
+				After writing the code above in your program, click on run button.(click enter if you are using command promp). 
+				The result (which is called "output" in programming) is the words
+				<div class="output">
+					Hello World
+				</div>
+			</p>
+			<p>
+				Note that the single quotation marks don't appear in the output. The computer displays only the words between them. 
+				If you want to display quotes to the user, then you need \ infront of it.
+				<div class="code">
+					print("Ko Ko said, \"I'm hungry.\" ")
+				</div>
+				The print statement gives the user multiple lines of output. <br/>
+				<div class="code">
+					print("Hello World") <br/>
+					print("Hi")
+				</div>
+				<div class="output">
+					Hello World<br />
+					Hi
+				</div>
+				We can use a pair of <i>single</i> quates(' ') instead of <i>double</i>> quotes (" "). 
+				<div class="code">
+					print("Hello") <br />
+					print('Hello') <br/>
+					print("Ko Ko said, \" I'm hungry \"") <br />
+					print('Ko Ko said, "I\'m hungry"')
+				</div>
+				Note that in line 4, we don't need \ infront of " while using ('...') but we need infront of '<br />
+				In Python, we use backslash to print " inside "..."(' inside '...'). We can aslo use <c>\n</c> for line breaking.
+				<div class="code">
+					print("This the first line. \n This is the second line. \n Thank you for visiting our page. \n \\is backslah.")
+				</div>
+				To print backslash, we need to use <c>\\</c>
+				<div class="output">
+					This is the first line.<br />
+					This is the second line.<br />
+					Thank you for visiting our page. <br />
+					\ is backslah
+				</div>
+			</p>
+		</section>
+
+		<section class="Data Types and Values">
+			<h3>Data Types and Values in Python</h3>
+			<p> After learning Hello World Program, I believe that you understand the print statement. We need parenthesis after print. 
+				We have to use a pair of either <i>single</i> quotes or <i>double</i> quotes between the parnthesis. 
+				We have to put the text we want to display between quotes. Without quotes, it may lead the error. 
+				Write the following codes and run the program. 
+				<div class="code">
+					print(Love)
+				</div>
+				You get error messages beacause of lacking quotes.
+				But you won't see any error message while you run the following code.
+				<div class="code">
+					print(1500)
+				</div>
+				This is because 1500 and Love belong to different data types: 1500 is an integer while Love is not. So we need quotes for Love.
+				<div class="code">
+					print("Love")
+				</div>
+				In computer programming, a sequence of characters is called a string. In Python, string is always put inside a pair of quotes 
+				(single quotes or double quotes). Love in the above code is string.
+			</p>
+			<p>
+				A <i>VALUE </i> is one of the basic things a program works with. It may be a letter or a number. Some of the values we have seen are 'Hello World!', 1500 and "Hello". <br />
+				Different values belong to different types: 1500 is an integer and Love is a string.<br />
+				1500, "1500", "1500.0" and 1500.0 are all values. The types of these values can be found by using type() function. The type() function doesn't display the result. So we need the print() statement. <br />
+				<div class="code">
+					print(type(1500))<br />
+					print(type("1500"))<br />
+					print(type("1500.0"))<br/>
+					print(type(1500.0))
+				</div>
+				The output is as follows
+				<div class="output">
+					&lt class 'int' &gt <br/>
+					&lt class 'str' &gt <br/>
+					&lt class 'str' &gt <br/>
+					&lt class 'float' &gt
+				</div>
+				int means integer (e.g. 1500, 3, 7) str means string (e.g. "Hello World") float means floating points (e.g. 3.14). They are the most common data types for beginner.
+			</p>
+			<p>
+				We can convert the type of certain values. <c>int()</c> is used to convert into integer. <c>float()</c> is used to convert into floating point. <c>str()</c> is used to convert into string.
+				<div class="code">
+					print(int("3")+int("2")) <br/>
+					print(float(int(3.14)*2)) <br/>
+					print(str(99.99)+str(int("1")+int(77.77)))
+				</div>
+				The value behind decimal is ignored while converting from floating point into integer.
+				<div class="output">
+					5 <br/>
+					6.0 <br />
+					99.9978
+				</div>
+			</p>
+		</section>
+
+		<section class="Variable">
+			<h3>Variable in Python</h3>
+			<p>
+				In "Data Types and Values", we have seen that 1500 is a value and its type is integer. We can asign any value to a variable.
+				<div class="code">
+					Love = 1500<br/>
+					print(Love)
+				</div>
+				The first line in the above program is called assignment statement. It assigns the value 1500 to a variable called Love. Python doesn't need quotes to assign integer but it needs quotes to assign string. <br/>
+				<div class="code">
+					A = "Hello everyone" <br />
+					print(A) <br />
+					print("A")
+				</div>
+				In the above program, <c>A </c> and <c>"A"</c> are two different things. <c>A</c> is variable name and 
+				<c>"A"</c> is the string.So the output is not the same.
+				<div class="output">
+					Hello everyone <br />
+					A
+				</div>
+				Python is a case sensitive language. This means that A and a are two different variables. We can use characters, numbers and 
+				underscore to name a variable. We can't use space and symbols (e.g. *, &,...) We can't use numbers at the start of a veriable name.
+				It is important to remember that we need to assign a value to the veriable before using it.
+			</p>
+		</section>
+		<section>
+			<h3>Operations</h3>
+			<p>
+				Write the following code in your program and run it.
+				<div class="code">
+					print(5+10) <br />
+					print('5'+'10')
+				</div>
+				The output is as follows.
+				<div class="output">
+					15 <br />
+					510
+				</div>
+			</p>
+			<p>
+				This is because <c>5</c> is integer while <c>'5'</c> is string. Python adds two integers and concatenate two strings. <c>5</c> and <c>10</c> are called operands and <c>+</c> is called operator. Since + needs two operands (in this example, <c>5</c> and <c>10</c>), it is called binary operator. It can also be called arithmetic operator because it performs mathematical operation on numeric values. +, - , *, / are common arithmetic operators. Note that the addition of two integers give integer but the division of two integers gives floating point.
+			</p>
+			<p>
+				Python divide operators in the following groups.
+				<ol>
+					<li>Arithmetic operators(+, -, *, /, %, **, //)</li>
+					<li>Assignment operators(=,  +=,  -=,  *=, /=, %=, **=, //=, etc.) </li>
+					<li>Comparison operators(==, !=, >, <, >=, <=)</li>
+					<li>Logical operators(and, or, not)</li>
+					<li>Identity operators (is, is not)</li>
+					<li>Membership operators(in, not in)</li>
+					<li>Bitwise operators (&, |, ^, ~, <<, >>)</li>
+				</ol>
+				As a beginner, you have to understand Arithmetic operators, Assignment Operators and Comparison operators.
+			</p>
+			<p>
+				+ concatenate two strings. Remember that <c>print("5"+'10')</c> gives the output <c>510</c>. In mathematics, 5*3 =5+5+5= 15. This is the same thing in string. <c>"5"*3</c> will give you <c>"555"</c> (because "5"*3="5"+"5"+"5"="555")
+				+ and - serves as unary operator, which takes only one operand.
+				<div class="code">
+					print(+5 * -3)
+				</div>
+				Remember that we need to use print() function to display the output. In this example, + takes only one operand <c> 5</c> which means positive 5. - takes only onle operand<c>3</c> which means negative three.
+			</p>
+		</section>
+		<section class="Simple Input & output">
+			<p>
+				<h3>Simple input& output</h3>
+				We have seen that <c>print()</c> statement gives the simple output. We can ask the user for input. This simply done by using the <c>input()</c> funtion.
+				<div class="code">
+					a=(input("Please Enter Your name"))
+					print("My Dear Friend " + a +" Thank you for visiting my page. ")
+				</div>
+				Note the <c>input()</c> function alaways gives the string type value. I hope you have already understand string concatenation by using + .
+			</p>
+		</section>
+	</body>
+</html>

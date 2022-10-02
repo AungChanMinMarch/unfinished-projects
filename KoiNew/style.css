@@ -1,0 +1,90 @@
+body {
+    margin: 0%;
+}
+#characterList,
+.control,
+img {
+    display: none;
+}
+#delay {
+    width: 100%;
+    height: 90vh;
+    display: grid;
+    justify-content: center;
+    align-content: space-evenly;
+}
+canvas {
+    position: absolute;
+}
+#delay button {
+    width: 32vw;
+    height: calc(8vw + 8vh);
+    border-radius: 0.5vw;
+    font-size: 6.5vw;
+}
+
+#characterList {
+    width: 100%;
+    height: 95vh;
+    justify-content: center;
+    align-content: space-evenly;
+}
+#characterList button {
+    width: 20vw;
+    height: calc(2.5vw + 7.5vh);
+    border-radius: 2%;
+    font-size: 3vw;
+}
+/* 
+.control {
+    position: absolute;
+    top: calc(90vh - 7vw);
+    left: 84vw;
+    font-size: 2vw;
+    z-index: 3;
+}
+fieldset {
+    width: 6vw;
+    height: 8vw;
+    border-radius: 50%;
+    text-align: center;
+}
+.eki button {
+    width: 5vw;
+    height: 5vw;
+    border-radius: 50%;
+    font-size: 2vw;
+}
+#container {
+    display: block;
+}
+
+@media only screen and (orientation: portrait) {
+    #container {
+        height: 100vw;
+
+        -webkit-transform: rotate(90deg);
+
+        -moz-transform: rotate(90deg);
+
+        -o-transform: rotate(90deg);
+
+        -ms-transform: rotate(90deg);
+
+        transform: rotate(90deg);
+    }
+}
+
+@media only screen and (orientation: landscape) {
+    #container {
+        -webkit-transform: rotate(0deg);
+
+        -moz-transform: rotate(0deg);
+
+        -o-transform: rotate(0deg);
+
+        -ms-transform: rotate(0deg);
+
+        transform: rotate(0deg);
+    }
+} */

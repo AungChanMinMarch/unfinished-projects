@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="battle_field.js"></script>
+        <style>
+            body{
+                margin: 0%;
+                height: 100%;
+            }
+            #control{
+                display: none;
+            }
+            .move{
+                width: 5vw;
+                position: absolute;
+                top: 90vh;
+            }
+            .left{left: 2.5vw;}
+            .right{left: calc( 17.5vw + 5vh );}
+            #backpack{
+                width: 7.5vw;
+                height: 7.5vh;
+                position: absolute;
+                top: 20vh;
+                right: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="delay">
+            
+            <button onclick="start()">
+                Start
+            </button>
+            <button onclick="quit()">
+                Quit
+            </button>
+        </div>
+        <div id="control">
+            <button class="move left" onmousedown="moveleft()" onmouseup="stop()">left</button>
+            <button class="move right" onmousedown="moveright()" onmouseup="stop()">right</button>
+            <button id="backpack">backpack</button>
+        </div>
+        <script>
+            //creating canvas
+var w = window.innerWidth;
+var h = window.innerHeight;
+var canvas = document.createElement("canvas");
+canvas.width = w;
+canvas.height = h;
+
+var ctx = canvas.getContext("2d");
+
+canvas.setAttribute("onclick", "shot(event)");
+
+//add background image
+var bgImg = document.createElement("img");
+bgImg.setAttribute("src", "background.jpg");
+bgImg.style.width = w;
+bgImg.style.height = h;
+var atkSpeed = 300;
+var background = new component(w, h, bgImg, 0, 0, "image" );
+
+//Drawing gun man
+var manWidth = (w+h)*0.05;
+var manHeight = (w+h)*0.1;
+var manX = 0.1*w;
+var manY = h-manHeight;
+var gunMan = new component(manWidth, manHeight, "black", manX, manY, "rect" );
+
+var gunX = w*0.2;
+var gunY = h*0.9;
+var bulletArray = [];
+
+var busy = false;
+
+function bullet(x,y, radius){
+    this.x = gunX;
+    this.y = gunY;
+    this.targetX = x;
+    this.targetY = y;
+
+    this.hypotenuse = Math.sqrt((gunX-this.targetX)**2 + (gunY - this.targetY)**2);
+
+    this.dx = 4*(this.targetX - gunX) / this.hypotenuse;
+    this.dy = 4*(this.targetY - gunY) / this.hypotenuse;
+
+    this.radius = radius;
+    this.draw = function(){
+        ctx.beginPath();
+        ctx.arc( this.x, this.y, this.radius, 0, Math.PI*2, false);
+        ctx.strokeStyle='#e7feff';
+        ctx.stroke();
+        ctx.fillStyle = '#000';
+        ctx.fill();
+    }
+    this.update = function(){
+        this.x += this.dx;
+        this.y += this.dy;
+        this.draw();
+    }
+}
+
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    this.width = width;
+    this.height = height;   
+    this.x = x;
+    this.y = y;
+    this.sx = 0;
+    this.dsx = 0;
+    this.update = function() {
+        switch(this.type){
+            case "text":
+                ctx.font = this.width + " " + this.height;
+                ctx.fillStyle = color;
+                ctx.fillText(this.text, this.x, this.y);
+                break;
+            case "circle":
+                break;
+            case "image":
+                this.sx += this.dsx;
+                this.sx = (this.sx > w)? this.sx-w : (this.sx<-w)? this.sx+w :this.sx;
+                if(this.sx == 0){
+                    ctx.drawImage(bgImg,0,0)
+                }else if (this.sx <0){
+                    let bg1w =- this.sx; //background image1 's width
+                    let bg2w = w +this.sx; //background image1 's width
+                    ctx.drawImage(bgImg, bg2w, 0, bg1w, h, 0,0, bg1w, h); //background image1
+                    ctx.drawImage(bgImg, 0, 0, bg2w, h, bg1w,0, bg2w, h);//background image2
+                }else{
+                    ctx.drawImage(bgImg,this.sx,0,w-this.sx,h, 0,0,w-this.sx,h);
+                    ctx.drawImage(bgImg,0,0,this.sx,h, w-this.sx,0,this.sx,h);
+                }
+                break;
+            case "rect":
+                ctx.fillStyle = color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+    }
+}
+
+function start(){
+    let delayBox = document.getElementById("delay");
+    delayBox.style.display = "none";
+
+    document.body.appendChild(canvas);
+    
+    document.getElementById("control").style.display ="block";
+    
+    animate();
+}
+function quit(){
+    alert("Bye bye")
+}
+
+function animate(){
+    ctx.clearRect(0,0,w,h);
+    background.update();
+    gunMan.update();
+    for (let i = 0; i < bulletArray.length; i++) {
+        bulletArray[i].update();
+    }
+    requestAnimationFrame(animate);
+}
+function drawBody(){
+    ctx.fillStyle = "#000000"
+    ctx.fillRect(manX, manY,manWidth, manHeight);
+}
+
+function shot(event){
+    if(!busy){
+        busy = true;
+        var x = event.clientX;
+        var y = event.clientY;
+        bulletArray.push(new bullet(x,y,w*0.025));
+        setTimeout(() => {
+            busy = false;
+            }, atkSpeed);
+    }
+}
+
+function moveleft(){
+    background.dsx = -1;
+}
+function moveright(){
+    background.dsx = 1;
+}
+function stop(){
+    background.dsx =0;
+}
+        </script>
+    </body>
+</html>

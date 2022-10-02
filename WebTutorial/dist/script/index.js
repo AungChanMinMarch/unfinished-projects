@@ -1,0 +1,60 @@
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/style.css":
+/*!***********************!*\
+  !*** ./src/style.css ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://WebTutorial/./src/style.css?");
+
+/***/ }),
+
+/***/ "./src/tutorial/template.js":
+/*!**********************************!*\
+  !*** ./src/tutorial/template.js ***!
+  \**********************************/
+/***/ (() => {
+
+eval("var template = document.createElement(\"template\");\r\ntemplate.innerHTML = `\r\n<style>\r\n* {\r\n  box-sizing: border-box!important;\r\n}\r\n:host {\r\n  width: 80%;\r\n  margin: 0 auto;\r\n  display:flex;\r\n  flex-direction:column;\r\n  background-color: #222831;\r\n}\r\n#code-playground {\r\n  display: flex;\r\n}\r\nfooter {\r\n  display: flex;\r\n  justify-content: space-between;\r\n}\r\n.code-playground-items {\r\n  width: 100%;\r\n  min-width: 0px;\r\n  overflow-y: scroll;\r\n  -ms-overflow-style: none; /*this make the scrollbar invisible for IE*/\r\n  scrollbar-width: none; /*this make the scrollbar invisible for firefox*/\r\n}\r\n/* the following block Hide scrollbar for Chrome, Safari and Opera */\r\n.code-playground-items::-webkit-scrollbar {\r\n  display: none;\r\n}\r\n\r\n#coding-result{\r\n  display:none;\r\n  flex-direction: column;\r\n  height: calc(30vh + 68px); /*To adjust height for show result on top and bot*/\r\n  max-height: 238px; /*22.667(label height) * 3 + 170 (texarea height)*/\r\n  background-color : #fff;\r\n  color: #000;\r\n}\r\n#result-console{\r\n  display:none;\r\n  height : 50%;\r\n  overflow-y: scroll;\r\n  -ms-overflow-style: none; /*this make the scrollbar invisible for IE*/\r\n  scrollbar-width: none; /*this make the scrollbar invisible for firefox*/\r\n}\r\n#result-console > div{\r\n  width:100%;\r\n  display:block;\r\n  resize:none;\r\n}\r\n#result-page{\r\n  height: 100%;\r\n}\r\n.coding-area-container {/*position must be relative for copy and reset icon*/\r\n  position: relative;\r\n}\r\nlabel{\r\n  /*this two line let user be able to click anywhere to run updateFocus function*/\r\n  display : block;\r\n  width:100%;\r\n}\r\n.coding-area {\r\n  display: none;\r\n  width: 100%;\r\n  height: 30vh;\r\n  max-height: 170px;\r\n  resize: none;\r\n  border-left: 6px solid #30475E;\r\n}\r\n.copy-icon {\r\n  background: url(http://127.0.0.1:5500/copy-icon.svg) 50% no-repeat;\r\n  width: 24px;\r\n  height: 24px;\r\n  right: 0;\r\n  top: 0;\r\n  border: none;\r\n  position: absolute;\r\n}\r\n.reload-icon {\r\n  background: url(http://127.0.0.1:5500/reload-icon.svg) 50% no-repeat;\r\n  width: 20px;\r\n  height: 20px;\r\n  right: 25px; /* 24px(copy-icon width) + 1px(for a little space between them)*/\r\n  top: 1px;\r\n  border: none;\r\n  position: absolute;\r\n}\r\n.visually-hidden {\r\n  position: absolute;\r\n  clip: rect(0 0 0 0);\r\n  overflow: hidden;\r\n  width: 1px;\r\n  height: 1px;\r\n  margin: -1px;\r\n  border: 0;\r\n  padding: 0px;\r\n}\r\n</style>\r\n<div id=\"code-playground\">\r\n  <div class=\"code-playground-items\">\r\n    ${addCodingArea(\"html\")}\r\n    ${addCodingArea(\"css\")}\r\n    ${addCodingArea(\"js\")}\r\n  </div>\r\n  <div class=\"code-playground-items\" id=\"coding-result\">\r\n      <iframe\r\n        id=\"result-page\" class=\"coding-result-area\"\r\n        title=\"result\"\r\n        frameborder=\"0\">\r\n      </iframe>\r\n      <div id='console'>Console</div>\r\n      <div id =\"result-console\" class=\"coding-result-area\">\r\n        <div contentEditable = \"true\"> </div>\r\n      </div>\r\n  </div>\r\n</div>\r\n<footer>\r\n  See result on\r\n  <div id=\"left\">left</div>\r\n  <div id=\"right\">right</div>\r\n  <div id=\"top\">top</div>\r\n  <div id=\"bottom\">bottom</div>\r\n  <a target=\"_blank\" id=\"show-full-page\">Full</a>\r\n</footer>\r\n`;\r\n\r\nfunction addCodingArea(lang) {\r\n  const LANG = lang.toUpperCase();\r\n  return `\r\n  <!--coding-area-container is needed to position copy and reset icon properly-->\r\n  <div class=\"coding-area-container\">\r\n    <label for=\"${lang}\" id = \"${lang + \"-btn\"}\">${LANG}</label>\r\n    <textarea\r\n      id=\"${lang}\"\r\n      class=\"coding-area\"\r\n      placeholder=\"Double click to write ${LANG}\"\r\n    >\r\n    </textarea>\r\n    <div class=\"copy-icon icon\" id=\"${\"copy-\" + lang}\">\r\n      <span class=\"visually-hidden\">Copy to Clipboard</span>\r\n    </div>\r\n    <div class=\"reload-icon icon\" id=\"${\"reload-\" + lang}\">\r\n      <span class=\"visually-hidden\">Reload</span>\r\n    </div>\r\n  </div>\r\n  `;\r\n}\r\n\r\nclass codeSnippet extends HTMLElement {\r\n  constructor() {\r\n    super(); // always call super() first in the constructor.\r\n    const shadowRoot = this.attachShadow({ mode: \"open\" });\r\n    const doc = this.shadowRoot;\r\n    doc.appendChild(template.content.cloneNode(true));\r\n\r\n    const resultArea = doc.getElementById(\"result-page\");\r\n    const html = doc.getElementById(\"html\");\r\n    const css = doc.getElementById(\"css\");\r\n    const js = doc.getElementById(\"js\");\r\n\r\n    let focus = this.getAttribute(\"data-focus\");\r\n    doc.getElementById(focus).style.display = \"block\";\r\n\r\n    doc.getElementById(\"html-btn\").onclick = () => {\r\n      updateFocus(\"html\");\r\n    };\r\n    doc.getElementById(\"css-btn\").onclick = () => {\r\n      updateFocus(\"css\");\r\n    };\r\n    doc.getElementById(\"js-btn\").onclick = () => {\r\n      updateFocus(\"js\");\r\n    };\r\n    function updateFocus(lang) {\r\n      doc.getElementById(focus).style.display = \"none\";\r\n      doc.getElementById(lang).style.display = \"block\";\r\n      focus = lang;\r\n    }\r\n\r\n    //copy section\r\n    doc.getElementById(\"copy-html\").onclick = () => {\r\n      copyToClipboard(html);\r\n    };\r\n    doc.getElementById(\"copy-css\").onclick = () => {\r\n      copyToClipboard(css);\r\n    };\r\n    doc.getElementById(\"copy-js\").onclick = () => {\r\n      copyToClipboard(js);\r\n    };\r\n    function copyToClipboard(el) {\r\n      navigator.clipboard.writeText(el.value).then(\r\n        function () {\r\n          /* clipboard successfully set */\r\n          console.log(\"copied successfully\");\r\n        },\r\n        function () {\r\n          /* clipboard write failed */\r\n          el.select();\r\n          el.setSelectionRange(0, 99999); /* For mobile devices */\r\n\r\n          /* Copy the text inside the text field */\r\n          document.execCommand(\"copy\");\r\n        }\r\n      );\r\n    }\r\n\r\n    //reload section\r\n    //get and store the original codes(value)\r\n    const c = this.children;\r\n    const htmlValue = getValue(\"html\", c);\r\n    const cssValue = getValue(\"css\", c);\r\n    const jsValue = getValue(\"js\", c);\r\n    function getValue(lang, arr) {\r\n      for (let i = 0; i < arr.length; i++) {\r\n        if (arr[i].getAttribute(\"data-type\") == lang) return arr[i].innerHTML;\r\n      }\r\n      return \"\";\r\n    }\r\n    //loading for the first time\r\n    html.value = htmlValue;\r\n    css.value = cssValue;\r\n    js.value = jsValue;\r\n    //reloading on click event\r\n    doc.getElementById(\"reload-html\").onclick = () => {\r\n      html.value = htmlValue;\r\n    };\r\n    doc.getElementById(\"reload-css\").onclick = () => {\r\n      css.value = cssValue;\r\n    };\r\n    doc.getElementById(\"reload-js\").onclick = () => {\r\n      js.value = jsValue;\r\n    };\r\n\r\n    var myConsole = doc.getElementById(\"result-console\");\r\n    doc.getElementById(\"console\").onclick = function () {\r\n      myConsole.style.display = \"block\";\r\n    };\r\n    resultArea.contentWindow.console.log = function (message) {\r\n      var log = document.createElement(\"div\");\r\n      log.contentEditable = \"false\";\r\n      log.innerHTML =\r\n        typeof message == \"object\" ? JSON.stringify(message) : message;\r\n      myConsole.insertBefore(log, myConsole.lastElementChild);\r\n    };\r\n\r\n    // footer section\r\n    doc.getElementById(\"left\").onclick = () => {\r\n      run(\"row-reverse\");\r\n    };\r\n    doc.getElementById(\"right\").onclick = () => {\r\n      run(\"row\");\r\n    };\r\n    doc.getElementById(\"top\").onclick = () => {\r\n      run(\"column-reverse\");\r\n    };\r\n    doc.getElementById(\"bottom\").onclick = () => {\r\n      run(\"column\");\r\n    };\r\n    function run(position) {\r\n      doc.getElementById(\"code-playground\").style.flexDirection = position;\r\n      doc.getElementById(\"coding-result\").style.display = \"flex\";\r\n      const resultDoc = resultArea.contentWindow.document;\r\n      resultDoc.open();\r\n      resultDoc.write(`\r\n        <!DOCTYPE html>\r\n        <html lang=\"en\">\r\n          <head>\r\n            <meta charset=\"UTF-8\" />\r\n            <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\r\n            <style>${css.value}</style>\r\n          </head>\r\n          <body>\r\n            ${html.value}\r\n            <script> ${js.value}</script>\r\n          </body>\r\n        </html>\r\n      `);\r\n      resultDoc.close();\r\n    }\r\n\r\n    doc.getElementById(\"show-full-page\").onclick = function () {\r\n      // storing\r\n      const code = {};\r\n      if (html.value) code.html = html.value;\r\n      if (css.value) code.css = css.value;\r\n      if (js.value) code.js = js.value;\r\n\r\n      let codePlaygroundID = window.localStorage.length;\r\n      window.localStorage.setItem(codePlaygroundID, JSON.stringify(code));\r\n      this.href =\r\n        \"http://127.0.0.1:5500/code-playground.html? codePlaygroundID=\" +\r\n        codePlaygroundID;\r\n    };\r\n  }\r\n  connectedCallback() {\r\n    console.log(\"added\");\r\n  }\r\n}\r\nwindow.customElements.define(\"code-snippet\", codeSnippet);\r\nconsole.log(console.log);\r\n\n\n//# sourceURL=webpack://WebTutorial/./src/tutorial/template.js?");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The require scope
+/******/ 	var __webpack_require__ = {};
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	__webpack_modules__["./src/style.css"](0, {}, __webpack_require__);
+/******/ 	var __webpack_exports__ = {};
+/******/ 	__webpack_modules__["./src/tutorial/template.js"](0, __webpack_exports__, __webpack_require__);
+/******/ 	
+/******/ })()
+;

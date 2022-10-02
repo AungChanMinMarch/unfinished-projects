@@ -1,0 +1,6 @@
+.Sidebar{
+	padding: 20px 40px;
+}
+.Sidebar > *{
+	width: 100%;
+}

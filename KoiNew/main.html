@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="user-scalable=no" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="script.js"></script>
+        <script src="joystick.js"></script>
+        <script src="animate.js"></script>
+        <script src="character.js"></script>
+        <script src="skills.js"></script>
+        <script src="library.js"></script>
+    </head>
+    <body id="container">
+        <img id="test" src="oddDead.jpg" />
+        <div id="delay">
+            <button onclick="showCharacter()">Start</button>
+            <button onclick="quit()">Quit</button>
+        </div>
+
+        <div id="characterList">
+            <button onclick="choose('bigSoldier')">Big Soldier</button>
+            <button onclick="choose('eki')">Eki</button>
+            <button onclick="choose('Lucy')">Lucy</button>
+            <button onclick="choose('unknown')">UNKNOWN</button>
+        </div>
+
+        <!-- TODO delete <div class="control bigSoldier">
+            <fieldset onclick="laserArrow()">
+                <legend id="bulletLeft">50</legend>
+            </fieldset>
+        </div>
+
+        <div class="control eki">
+            <button class="skill" onclick="speedUp()">Up</button>
+            <button class="skill" onclick="attack()">Atk</button>
+        </div> -->
+
+        <div id="bigSoldier">
+            <img src="bigSoldier/bigSoldier1.png" />
+            <img src="bigSoldier/bigSoldier2.png" />
+            <img src="bigSoldier/bigSoldier2.png" />
+        </div>
+        <div id="eki">
+            <img src="Eki/eki1.png" />
+            <img src="Eki/eki2.png" />
+            <img src="Eki/eki3.png" />
+            <img src="Eki/ekiSword2.png" />
+            <img src="Eki/ekiSword1.png" />
+        </div>
+
+        <div id="zombie">
+            <img src="zombie/zombie1.png" />
+            <img src="zombie/zombie2.png" />
+            <img src="zombie/zombie2.png" />
+        </div>
+
+        <img src="tower.png" id="tower" />
+    </body>
+</html>

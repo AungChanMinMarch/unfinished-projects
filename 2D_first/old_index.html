@@ -1,0 +1,107 @@
+<html lang="my">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <!-- <link
+      href="https://mmwebfonts.comquas.com/fonts/?font=pyidaungsu"
+      rel="stylesheet"
+    /> -->
+    <script src="translate.js"></script>
+    <script src="2d-library.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+    <script async src="script.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="input-style.css" />
+    <script async src="input-script.js"></script>
+
+    <link rel="stylesheet" href="peek-style.css" />
+    <script async src="peek-script.js"></script>
+
+    <link rel="stylesheet" href="calc-style.css" />
+    <script async src="calc-script.js"></script>
+
+    <title>Main 2D page</title>
+  </head>
+  <body>
+    <div id="page-change-bar">
+      <div id="page-title-bar">
+        <img src="save.png" alt="save" id="save" onclick="save()" />
+        <div onclick="changePage('input-page')">သွင်းမည်။</div>
+        <div onclick="changePage('peek-page')">ကြည့်မည်။</div>
+        <div onclick="changePage('calc-page')">စားမည်။</div>
+        <img src="clear.png" alt="clear" id="clear" onclick="clearAll()" />
+      </div>
+    </div>
+    <div id="page-container">
+      <div id="input-page" class="page">
+        <div id="input-display-area">
+          <table>
+            <tbody id="input-tbody"></tbody>
+          </table>
+        </div>
+        <div id="keyboard">
+          <button>၇</button>
+          <button>၈</button>
+          <button>၉</button>
+          <button class="line-input" data-action="power">ပါဝါ</button>
+          <button class="multi-input" data-action="t">ထိပ်</button>
+
+          <button>၄</button>
+          <button>၅</button>
+          <button>၆</button>
+          <button class="line-input" data-action="power">အပူး</button>
+          <button class="multi-input" data-action="p">ပိတ်</button>
+
+          <button>၁</button>
+          <button>၂</button>
+          <button>၃</button>
+          <button class="line-input" data-action="power">နက္ခတ်</button>
+          <button class="multi-input" data-action="b">ဘရိတ်</button>
+
+          <button>၀</button>
+          <button id="clear-key" data-action="c">Del</button>
+          <button class="line-input" data-action="power">ရှမ်းပူး</button>
+          <button class="multi-input" data-action="all">အပါ</button>
+
+          <button class="single-input r" data-action="r">R</button>
+          <button class="single-input d" data-action="d">D</button>
+          <button class="single-input s" data-action="e">။</button>
+
+          <button class="enter-key enter" data-action="s">Enter</button>
+          <button class="enter-key single-input">၀၀</button>
+        </div>
+      </div>
+      <div id="peek-page" class="page">
+        <div id="peek-nav-bar"></div>
+        <div id="peek-table-container">
+          <table>
+            <tbody id="peek-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="calc-page" class="page">
+        <div id="ask-rate">
+          <div>ငွေပေါင်း</div>
+          <div id="total">၀</div>
+          <div>စားမည့်နှုန်း</div>
+          <input type="number" id="rate" />
+          <div></div>
+          <button onclick="test()">စမ်းကြည့်မည်။</button>
+        </div>
+        <div id="test-result">
+          <div>ဒိုင်တင်</div>
+          <div id="send">0</div>
+          <div>စားငွေ</div>
+          <div id="eat">0</div>
+          <button onclick="ok()">အိုကေ</button>
+          <button onclick="makePdfFile()">သိမ်းထားမည်။</button>
+        </div>
+        <table id="send-table"></table>
+      </div>
+    </div>
+  </body>
+</html>

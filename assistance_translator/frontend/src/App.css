@@ -1,0 +1,44 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.addIcon {
+	position: absolute;
+	bottom: 5vh;
+	right: 5vw;
+}
+
+a{
+	text-decoration: none;
+	background-color: #712345;
+	color: #eee;
+	padding: 5px 10px;
+	border-radius: 5px;
+	margin: 5px 10px;
+}
+
+.loading{
+	background-color: #ddd;
+	color: #000;
+	font-size: 2rem;
+	padding: 2rem 1rem;
+}
+.flexCol{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+}
+.addForm{
+	width: 100vw;
+	height: 100vh;
+	padding: 10vh 10vw;
+	background-color: #ddd;
+}
+
+.addForm > button{
+	padding: 5px 10px;
+	background-color: #232323;
+	color: #eee;
+	border-radius: 5px;
+}

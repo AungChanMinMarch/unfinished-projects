@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2D</title>
+    <style>
+      *,
+      *::after,
+      *::before {
+        box-sizing: border-box;
+      }
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        color: #ecf0f1;
+        overflow: hidden;
+      }
+      .page-change-bar {
+        width: 100%;
+        height: 5vh;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; /* not text height 100% make the text vertically*/
+        background-color: #1a4c6e;
+      }
+      .save {
+        height: 100%;
+      }
+      .delete {
+        height: 80%;
+      }
+      .page-container {
+        width: 100%;
+        height: 95vh;
+      }
+      .page {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+      #input-page {
+        z-index: 1;
+        background-color: #88badb;
+      }
+      #peek-page {
+        background-color: #3498db;
+      }
+      #calc-page {
+        background-color: #88badb;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 2em;
+      }
+
+      #input-display {
+        position: fixed;
+        top: 6vh;
+        left: 1vh;
+        right: 1vh;
+        bottom: 43vh;
+        overflow-y: scroll;
+        background-color: #3498db;
+      }
+      #keyboard {
+        width: 100%;
+        height: 42vh;
+        position: fixed;
+        bottom: 0;
+        display: grid;
+        grid-gap: 3vw;
+        padding: 3vw;
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        background-color: #3498db;
+      }
+      #keyboard button {
+        background-color: #1a4c6e;
+        font-size: 1.5em;
+        color: inherit;
+        border: none;
+      }
+      #keyboard button#is-pressed {
+        background-color: #2980b9;
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5) inset,
+          0 0 6px 0 rgba(0, 0, 0, 0.5) inset, 0 0 8px 0 rgba(0, 0, 0, 0.5) inset;
+      }
+      #del {
+        grid-column: 2/4;
+      }
+
+      #peek-nav {
+        position: fixed;
+        top: 5vh;
+        bottom: 0;
+        left: 0;
+        width: calc(10vw + 1vh);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        background-color: inherit;
+      }
+      #peek-display {
+        position: fixed;
+        top: calc(6vh + 1vw);
+        right: calc(1vh + 1vw);
+        bottom: calc(1vh + 1vw);
+        left: calc(11vw + 1vh);
+        padding: 0;
+        overflow-y: scroll;
+        background-color: inherit;
+      }
+      #peek-nav a {
+        text-decoration: none;
+        font-size: 1.5em;
+        color: inherit;
+        margin: 0 1vh;
+        text-align: center;
+        background-color: #1a4c6e;
+      }
+      #peek-display table {
+        line-height: 200%;
+      }
+      #peek-display tr:nth-child(even) {
+        background-color: #66acdb;
+      }
+      #peek-display tr:nth-child(odd) {
+        background-color: #246a99;
+      }
+
+      #calc-page {
+        position: fixed;
+        top: 5vh;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow-y: scroll;
+
+        display: flex;
+        flex-direction: column;
+      }
+      .flex-sticky-box {
+        font-size: 1.5em;
+        background-color: #3498db;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        position: sticky;
+        top: 0;
+      }
+      .flex-sticky-box > div {
+        width: 23vw;
+      }
+      input {
+        width: 23vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-change-bar">
+      <div class="save" onclick="save()">
+        <!-- preserveAspectRatio="x200Y200 meet" -->
+        <svg
+          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+          xmlns="http://www.w3.org/2000/svg"
+          height="100%"
+          viewBox="0 0 24 24"
+          version="1.1"
+          xmlns:cc="http://creativecommons.org/ns#"
+          xmlns:dc="http://purl.org/dc/elements/1.1/"
+        >
+          <g transform="translate(0 -1028.4)">
+            <path
+              d="m5 1031.4c-1.1046 0-2 0.9-2 2v14c0 1.1 0.8954 2 2 2h13 1c1.105 0 2-0.9 2-2v-13l-3-3h-13z"
+              fill="#3498db"
+            />
+            <path
+              d="m7 1031.4v1 5c0 0.5 0.4477 1 1 1h8c0.552 0 1-0.5 1-1v-5-1h-10z"
+              fill="#2980b9"
+            />
+            <path
+              d="m7 3v5c0 0.5523 0.4477 1 1 1h8c0.552 0 1-0.4477 1-1v-5h-10z"
+              transform="translate(0 1028.4)"
+              fill="#ecf0f1"
+            />
+            <path
+              d="m6 1040.4c-0.5523 0-1 0.4-1 1v3 2 3h4 6 4v-3-2-3c0-0.6-0.448-1-1-1h-4-4-4z"
+              fill="#ecf0f1"
+            />
+            <g fill="#bdc3c7">
+              <rect height="1" width="14" y="1048.4" x="5" />
+              <rect height="1" width="10" y="1042.4" x="7" />
+              <rect height="1" width="10" y="1044.4" x="7" />
+            </g>
+            <rect height="4" width="3" y="1032.4" x="13" fill="#3498db" />
+            <rect height=".99998" width="3" y="1032.4" x="13" fill="#2980b9" />
+          </g>
+        </svg>
+      </div>
+      <div onclick="change('input-page')">သွင်းမည်။</div>
+      <div onclick="change('peek-page')">ကြည့်မည်။</div>
+      <div onclick="change('calc-page')">စားမည်။</div>
+      <div class="delete" onclick="clearAll()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 128 128"
+          height="100%"
+        >
+          <path
+            style="fill: #2980b9"
+            d="M17.66229,21.88486,63.3847,30.82574l45.72241,8.94088a1.559,1.559,0,0,0,1.82788-1.22994A10.15176,10.15176,0,0,0,102.9192,26.6239l-15.172-2.96684.79656-4.07352A11.10952,11.10952,0,0,0,79.7827,6.56318L57.33412,2.17343A11.1096,11.1096,0,0,0,44.31375,10.9345L43.51718,15.008l-15.172-2.96685A10.15176,10.15176,0,0,0,16.43235,20.057a1.559,1.559,0,0,0,1.22994,1.82788ZM60.0674,9.82374,74.369,12.62036a8.2641,8.2641,0,0,1,6.5245,9.69647h0l-15.2613-2.9843L50.37093,16.34825h0A8.2641,8.2641,0,0,1,60.0674,9.82374Z"
+          />
+          <path
+            style="fill: #3498db"
+            d="M110.58839,47.36161H17.41161a1.559,1.559,0,0,0-1.55785,1.55785v5.90918c0,.85949,16.14275,61.05238,16.14275,61.05238a11.08149,11.08149,0,0,0,11.03938,10.153H84.96412A11.08149,11.08149,0,0,0,96.0035,115.881s16.14275-60.19289,16.14275-61.05238V48.91946A1.559,1.559,0,0,0,110.58839,47.36161Zm-61.934,64.2194a2.60793,2.60793,0,0,1-3.19666-1.84821c-4.44239-16.61345-8.95983-33.53068-11.91535-44.72956a2.61069,2.61069,0,1,1,5.04851-1.33243c2.95407,11.19159,7.47077,28.10409,11.911,44.71353A2.61043,2.61043,0,0,1,48.65435,111.581Zm17.95316-2.52243a2.61095,2.61095,0,0,1-5.22189,0V64.337a2.61095,2.61095,0,0,1,5.22189,0ZM94.45735,65.00325C91.3685,76.70879,86.46715,95.05644,82.542,109.73317a2.61073,2.61073,0,1,1-5.04414-1.34918c3.9237-14.67272,8.8236-33.01491,11.911-44.71316a2.61069,2.61069,0,1,1,5.04851,1.33243Z"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <div class="page-container">
+      <div class="page" id="input-page">
+        <div id="input-display">
+          <table>
+            <tbody id="input-tbody"></tbody>
+          </table>
+        </div>
+        <div id="keyboard">
+          <button>7</button>
+          <button>8</button>
+          <button>9</button>
+          <button data-input="ap">အပူး</button>
+
+          <button>4</button>
+          <button>5</button>
+          <button>6</button>
+          <button data-input="pw">ပါဝါ</button>
+
+          <button>1</button>
+          <button>2</button>
+          <button>3</button>
+          <button data-input="nk">နက္ခတ်</button>
+
+          <button>0</button>
+          <button id="del">DEL</button>
+
+          <button data-input="sp">ရှမ်းပူး</button>
+        </div>
+      </div>
+      <div class="page" id="peek-page">
+        <div id="peek-nav"></div>
+        <div id="peek-display">
+          <table>
+            <tbody id="peek-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class class="page" id="calc-page">
+        <div class="flex-sticky-box">
+          <div>total</div>
+          <div id="total">0</div>
+          <div>Rate?</div>
+          <input type="number" name="rate" id="rate" />
+          <div>send</div>
+          <div id="send">0</div>
+          <div>eat</div>
+          <div id="eat">0</div>
+        </div>
+        <button id="calc-OKbtn">Calc</button>
+        <div>average</div>
+        <div>0</div>
+        <table id="show-result">
+          <tbody id="calc-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+    <script>
+      var inpTbody = document.getElementById("input-tbody");
+      var peekTbody = document.getElementById("peek-tbody");
+      var calcTbody = document.getElementById("calc-tbody");
+
+      var keyboard = document.getElementById("keyboard");
+      var inpT_Lastline, index;
+      var add_newRow = function () {
+        inpT_Lastline = document.createElement("tr");
+        inpTbody.appendChild(inpT_Lastline);
+        index = 0;
+      };
+      var updateDisplay = function (colSpan) {
+        if (colSpan === null) {
+          index++;
+          return;
+        }
+        const td = document.createElement("td");
+        inpT_Lastline.appendChild(td);
+        td.setAttribute("colspan", colSpan.toString());
+        index += colSpan;
+      };
+      var calcCol = function (action) {
+        //argument list
+        if (!action) {
+          if (index == 0 || index == 3) return 1;
+          if (index == 1) return null;
+          if (index == 4) return null;
+        }
+        if (
+          action === "ap" ||
+          action === "pw" ||
+          action === "nk" ||
+          action === "sp"
+        )
+          return 3;
+      };
+      var updateKeyboard = function () {
+        changeVisible(visible_Input, "multi-input");
+      };
+
+      window.onload = function () {
+        writepeekTbody();
+        add_newRow();
+      };
+
+      keyboard.addEventListener("click", (e) => {
+        if (!e.target.matches("button")) return;
+
+        const key = e.target;
+        const input = key.dataset.input;
+        updateDisplay(calcCol(input));
+        inpT_Lastline.lastChild.innerHTML += key.textContent;
+        if (document.getElementById("is-pressed"))
+          document.getElementById("is-pressed").removeAttribute("id");
+        key.id = "is-pressed";
+
+        // if (!action) {
+        //   if (index === 0) {
+        //     changeVisible(visible_Input, "multi-input");
+        //   } else if (index === 1) {
+        //     changeVisible(visible_Input, "single-input");
+        //   } else if (index == 2) {
+        //   } else if (index === 3) {
+        //     changeVisible(visible_Input, "enter-key");
+        //   }
+        // } else if (action === "d" || action === "r") {
+        //   keyboard.dataset.isSingle = true;
+        //   addNewCol();
+        //   hide(visible_Input);
+        //   if (money) {
+        //     money = null;
+        //   } else {
+        //     colSpan(2);
+        //   }
+        // } else if (action === "e") {
+        //   if (keyboard.dataset.isSameSingle == "true") sameSingle();
+        //   else notSameSingle();
+        //   saveInPeek(inputTbody_lastLine);
+        //   startNewLine();
+        // } else if (
+        //   action == "t" ||
+        //   action === "p" ||
+        //   action == "b" ||
+        //   action === "all"
+        // ) {
+        //   keyboard.dataset.isSingle = false;
+        //   addNewCol();
+        //   colSpan(2);
+        //   writeSingleInput(key); //index+1
+        //   index++;
+        //   hide(visible_Input);
+        // } else if (action == "power") {
+        //   keyboard.dataset.isSingle = false;
+        //   colSpan(3);
+        //   writeSingleInput(key); //index+1
+        //   index += 2;
+        //   hide(visible_Input);
+        // } else if (action === "s") {
+        //   if (keyboard.dataset.isSingle == "true") {
+        //     const tds = inputTbody_lastLine.children;
+        //     if (tds.length == 3) {
+        //       keyboard.dataset.isSameSingle = true;
+        //       keyboard.dataset.sameSingleName = tds[1].innerHTML;
+        //       keyboard.dataset.money = tds[2].innerHTML;
+        //     } else if (tds.length == 4) {
+        //       keyboard.dataset.isSameSingle = false;
+        //       keyboard.dataset.money1 = tds[1].innerHTML;
+        //       keyboard.dataset.money2 = tds[3].innerHTML;
+        //     } else {
+        //       alert("this is error");
+        //     }
+        //   }
+        //   saveInPeek(inputTbody_lastLine);
+        //   startNewLine();
+        // } else if (action === "c") {
+        //   inputTbody_lastLine.remove();
+        //   startNewLine();
+        // }
+        document
+          .getElementById("input-display")
+          .scrollTo(0, document.getElementById("input-display").scrollHeight);
+      });
+    </script>
+
+    <!-- translate.js -->
+    <script>
+      function engToMy(num) {
+        var nums = {
+          0: "၀",
+          1: "၁",
+          2: "၂",
+          3: "၃",
+          4: "၄",
+          5: "၅",
+          6: "၆",
+          7: "၇",
+          8: "၈",
+          9: "၉",
+        };
+        var num = num.toString();
+        return num.replace(/([0-9])/g, function (key) {
+          return nums[key];
+        });
+      }
+      function myToEng(num) {
+        var nums = {
+          "၀": "0",
+          "၁": "1",
+          "၂": "2",
+          "၃": "3",
+          "၄": "4",
+          "၅": "5",
+          "၆": "6",
+          "၇": "7",
+          "၈": "8",
+          "၉": "9",
+        };
+        var num = num.toString();
+        return num.replace(/([၀-၉])/g, function (key) {
+          return nums[key];
+        });
+      }
+    </script>
+
+    <!-- 2d-library.js -->
+    <script>
+      function getR(num) {
+        var num = num.toString();
+        if (num.length == 2) {
+          return num[1] + num[0];
+        } else console.log("here is error");
+      }
+      function eng_Rs(_2d) {
+        const engNum = myToEng(_2d);
+        return [engNum, getR(engNum)];
+      }
+      function eng_Ds(_2d) {
+        const engNum = myToEng(_2d);
+        return [engNum];
+      }
+      function eng_Ms(num, multi) {
+        const engNum = myToEng(num);
+        var Ms = [];
+        var num_t, num_p;
+
+        if (multi == "ထိပ်") {
+          num_t = engNum.toString();
+          for (let i = 0; i < 10; i++) {
+            num_p = i.toString();
+            Ms.push(num_t + num_p);
+          }
+          return Ms;
+        } else if (multi == "ပိတ်") {
+          num_p = engNum.toString();
+          for (let i = 0; i < 10; i++) {
+            num_t = i.toString();
+            Ms.push(num_t + num_p);
+          }
+          return Ms;
+        } else if (multi == "ဘရိတ်") {
+          for (let i = 0; i < 10; i++) {
+            num_t = i.toString();
+            if (engNum - i >= 0) num_p = (engNum - i).toString();
+            else num_p = (engNum - i + 10).toString();
+            Ms.push(num_t + num_p);
+          }
+          return Ms;
+        } else if (multi == "အပါ") {
+          num_t = engNum.toString();
+          for (let i = 0; i < 10; i++) {
+            num_p = i.toString();
+            Ms.push(num_t + num_p);
+          }
+
+          num_p = engNum.toString();
+          for (let i = 0; i < 10; i++) {
+            if (i != engNum) {
+              num_t = i.toString();
+              Ms.push(num_t + num_p);
+            }
+          }
+          return Ms;
+        } else {
+          console.log("multi input error");
+          return [];
+        }
+      }
+      function eng_Ls(lineType) {
+        if (lineType == "ပါဝါ") {
+          return ["05", "16", "27", "38", "49"];
+        } else if (lineType == "အပူး") {
+          return ["00", "11", "22", "33", "44", "55", "66", "77", "88", "99"];
+        } else if (lineType == "နက္ခတ်") {
+          return ["07", "18", "24", "35", "96"];
+        } else if (lineType == "ရှမ်းပူး") {
+          return ["14", "25", "36", "41", "08"];
+        } else {
+          console.log("line input error");
+          return [];
+        }
+      }
+
+      function startNewLine() {
+        changeVisible(visible_Input, "line-input");
+        inputTbody_lastLine = document.createElement("tr");
+        inputTbody.appendChild(inputTbody_lastLine);
+        index = 0;
+        money = null;
+        addNewCol();
+      }
+      function changeVisible(hide, show) {
+        const hideObjs = document.getElementsByClassName(hide);
+        const showObjs = document.getElementsByClassName(show);
+        for (let i = 0; i < hideObjs.length; i++) {
+          hideObjs[i].style.visibility = "visible";
+          hideObjs[i].style.display = "none";
+        }
+        for (let i = 0; i < showObjs.length; i++) {
+          showObjs[i].style.display = "block";
+        }
+        visible_Input = show;
+        console.log(visible_Input);
+      }
+      function hide(hide) {
+        const hideObjs = document.getElementsByClassName(hide);
+        console.log(hide);
+        for (let i = 0; i < hideObjs.length; i++) {
+          hideObjs[i].style.visibility = "hidden";
+        }
+      }
+      function addNewCol() {
+        inputTbody_lastLine.appendChild(document.createElement("td"));
+      }
+      function colSpan(number) {
+        inputTbody_lastLine.lastChild.setAttribute(
+          "colspan",
+          number.toString()
+        );
+      }
+
+      function writeSingleInput(input) {
+        index++;
+        inputTbody_lastLine.lastChild.innerHTML += input.innerHTML;
+      }
+      function writeMoney(input) {
+        if (money == null) {
+          money = document.createElement("td");
+          inputTbody_lastLine.appendChild(money);
+        }
+        if (money.innerHTML == 0 && input.innerHTML == "၀") return;
+        money.innerHTML += input.innerHTML;
+      }
+
+      function writePeekTbody() {
+        for (let i = 0; i < 10; i++) {
+          for (let j = 0; j < 10; j++) {
+            let tr = document.createElement("tr");
+            peekTbody.appendChild(tr);
+
+            const td = document.createElement("td");
+            tr.appendChild(td);
+            td.innerHTML = engToMy(i) + engToMy(j);
+
+            const tdMoney = document.createElement("td");
+            tr.appendChild(tdMoney);
+            tdMoney.id = "peek" + i + j;
+            tdMoney.innerHTML = "၀";
+          }
+        }
+      }
+    </script>
+
+    <!-- script.js -->
+    <script>
+      var inputTbody_lastLine, index, money;
+      var saveData = true;
+
+      var visible_Input = "line-input";
+
+      window.onload = function () {
+        if (localStorage.length == 0) {
+          startNewLine();
+          writePeekTbody();
+          total = 0;
+        } else {
+          inputTbody.innerHTML = localStorage.getItem("input-tbody");
+          inputTbody_lastLine = inputTbody.lastChild;
+          index = parseInt(localStorage.getItem("index"));
+          changeVisible("line-input", localStorage.getItem("visible_Input"));
+          peekTbody.innerHTML = localStorage.getItem("peekTbody");
+          total = parseInt(localStorage.getItem("total"));
+        }
+        saveToCalc(0); //call this to display current total money
+        saveData = true;
+      };
+
+      function change(element) {
+        if (element != currentPageID) {
+          document.getElementById(currentPageID).style.zIndex = "-1";
+          currentPageID = element;
+          document.getElementById(element).style.zIndex = "3";
+        }
+      }
+      var fileLink = null;
+      function makePdfFile() {
+        var text = document.getElementById("calc-table").outerHTML;
+        let data = new Blob([text], { type: "text/html" });
+        if (!fileLink) fileLink = window.URL.createObjectURL(data);
+        else window.URL.revokeObjectURL(fileLink);
+
+        var anchor = document.createElement("a");
+        anchor.setAttribute("download", "info.html");
+        anchor.href = fileLink;
+        document.getElementById("show-result").appendChild(anchor);
+
+        // window.requestAnimationFrame(function () {
+        //   var event = new MouseEvent("click");
+        //   anchor.dispatchEvent(event);
+        //   document.body.removeChild(link);
+        // });
+      }
+    </script>
+
+    <!-- input-script.js -->
+    <script>
+      keyboard.addEventListener("click", (e) => {
+        if (e.target.matches("button")) {
+          const key = e.target;
+          const action = key.dataset.action;
+          if (!action) {
+            if (index === 0) {
+              changeVisible(visible_Input, "multi-input");
+              writeSingleInput(key);
+            } else if (index === 1) {
+              changeVisible(visible_Input, "single-input");
+              writeSingleInput(key);
+            } else if (index == 2) {
+              writeMoney(key);
+            } else if (index === 3) {
+              changeVisible(visible_Input, "enter-key");
+              writeMoney(key);
+            }
+          } else if (action === "d" || action === "r") {
+            keyboard.dataset.isSingle = true;
+            addNewCol();
+            writeSingleInput(key);
+            hide(visible_Input);
+            if (money) {
+              money = null;
+            } else {
+              colSpan(2);
+            }
+          } else if (action === "e") {
+            if (keyboard.dataset.isSameSingle == "true") sameSingle();
+            else notSameSingle();
+            saveInPeek(inputTbody_lastLine);
+            startNewLine();
+          } else if (
+            action == "t" ||
+            action === "p" ||
+            action == "b" ||
+            action === "all"
+          ) {
+            keyboard.dataset.isSingle = false;
+            addNewCol();
+            colSpan(2);
+            writeSingleInput(key); //index+1
+            index++;
+            hide(visible_Input);
+          } else if (action == "power") {
+            keyboard.dataset.isSingle = false;
+            colSpan(3);
+            writeSingleInput(key); //index+1
+            index += 2;
+            hide(visible_Input);
+          } else if (action === "s") {
+            if (keyboard.dataset.isSingle == "true") {
+              const tds = inputTbody_lastLine.children;
+              if (tds.length == 3) {
+                keyboard.dataset.isSameSingle = true;
+                keyboard.dataset.sameSingleName = tds[1].innerHTML;
+                keyboard.dataset.money = tds[2].innerHTML;
+              } else if (tds.length == 4) {
+                keyboard.dataset.isSameSingle = false;
+                keyboard.dataset.money1 = tds[1].innerHTML;
+                keyboard.dataset.money2 = tds[3].innerHTML;
+              } else {
+                alert("this is error");
+              }
+            }
+            saveInPeek(inputTbody_lastLine);
+            startNewLine();
+          } else if (action === "c") {
+            inputTbody_lastLine.remove();
+            startNewLine();
+          }
+          document
+            .getElementById("input-display")
+            .scrollTo(0, document.getElementById("input-display").scrollHeight);
+        }
+      });
+      function sameSingle() {
+        addNewCol();
+        console.log(keyboard.dataset.sameSingleName);
+        inputTbody_lastLine.lastChild.innerHTML +=
+          keyboard.dataset.sameSingleName;
+        colSpan(2);
+        addNewCol();
+        inputTbody_lastLine.lastChild.innerHTML += keyboard.dataset.money;
+      }
+      function notSameSingle() {
+        addNewCol();
+        inputTbody_lastLine.lastChild.innerHTML += keyboard.dataset.money1;
+        addNewCol();
+        inputTbody_lastLine.lastChild.innerHTML += "R";
+        addNewCol();
+        inputTbody_lastLine.lastChild.innerHTML += keyboard.dataset.money2;
+      }
+      var longpress = false;
+      var presstimer = null;
+
+      var cancel = function (e) {
+        if (presstimer !== null) {
+          clearTimeout(presstimer);
+          presstimer = null;
+        }
+      };
+
+      var start = function (e) {
+        const tr = e.target.closest("tr");
+        if (e.type === "click" && e.button !== 0) {
+          return;
+        }
+
+        if (presstimer === null) {
+          presstimer = setTimeout(function () {
+            if (confirm("ဖျက်ချင်တာ သေချာပါသလား")) {
+              inputTbody.deleteRow(tr.rowIndex);
+            }
+          }, 500);
+        }
+        return false;
+      };
+
+      inputTbody.addEventListener("mousedown", start, true);
+      inputTbody.addEventListener("touchstart", start);
+      inputTbody.addEventListener("click", cancel);
+      inputTbody.addEventListener("mouseout", cancel);
+      inputTbody.addEventListener("touchend", cancel);
+      inputTbody.addEventListener("touchleave", cancel);
+      inputTbody.addEventListener("touchcancel", cancel);
+    </script>
+
+    <!-- peek-script.js -->
+    <script>
+      const head = document.getElementById("peek-nav");
+      for (let i = 0; i < 10; i++) {
+        const anchor = document.createElement("a");
+        head.appendChild(anchor);
+        anchor.href = "#peek" + i.toString() + 0;
+        anchor.innerHTML = engToMy(i);
+      }
+      const peekTbody = document.getElementById("peek-tbody");
+
+      function saveInPeek(input) {
+        const tds = input.children;
+        if (tds.length == 2) {
+          const newMoney = myToEng(input.lastChild.innerHTML);
+          const Ls = eng_Ls(tds[0].innerHTML);
+          if (Ls.length == 5) {
+            for (let i = 0; i < Ls.length; i++) {
+              const _2d = Ls[i];
+              addMoney(eng_Rs(_2d), newMoney);
+            }
+          } //apu(အပူး)
+          else addMoney(Ls, newMoney);
+        } else if (tds.length == 3) {
+          const newMoney = myToEng(input.lastChild.innerHTML);
+          if (tds[1].innerHTML == "R") {
+            const _2d = myToEng(tds[0].innerHTML);
+            addMoney(eng_Rs(_2d), newMoney);
+          } else if (tds[1].innerHTML == "D") {
+            const _2d = myToEng(tds[0].innerHTML);
+            addMoney(eng_Ds(_2d), newMoney);
+          } else {
+            const multi = myToEng(tds[0].innerHTML);
+            const multiType = tds[1].innerHTML;
+            addMoney(eng_Ms(multi, multiType), newMoney);
+          }
+        } else if (tds.length == 4) {
+          const _2d = myToEng(tds[0].innerHTML);
+          let newMoney = myToEng(tds[1].innerHTML);
+          addMoney(eng_Ds(_2d), newMoney);
+          const r_2d = _2d[1] + _2d[0];
+          newMoney = myToEng(tds[3].innerHTML);
+          addMoney(eng_Ds(r_2d), newMoney);
+        }
+      }
+
+      function addMoney(_2ds, money) {
+        console.log(_2ds);
+        for (let i = 0; i < _2ds.length; i++) {
+          const id = "peek" + _2ds[i];
+          const moneyOf2d = document.getElementById(id);
+          const oldMoney = myToEng(moneyOf2d.innerHTML);
+          const totalMoney = parseInt(oldMoney) + parseInt(money);
+          moneyOf2d.innerHTML = engToMy(totalMoney);
+          saveToCalc(money);
+        }
+      }
+    </script>
+    <!-- calc-script.js -->
+    <script>
+      var total, rate;
+      var sendTable = document.getElementById("calc-table");
+      var sendTr; //current send table row
+      function saveToCalc(engMoney) {
+        total += parseInt(engMoney);
+        document.getElementById("total").innerHTML = engToMy(total);
+      }
+      function test() {
+        rate = parseInt(document.getElementById("rate").value);
+        var send = 0;
+        var eat = 0;
+        for (let i = 0; i < 10; i++) {
+          for (let j = 0; j < 10; j++) {
+            var _2dObj = document.getElementById("peek" + i + j);
+            var engMoney = parseInt(myToEng(_2dObj.innerHTML));
+            if (engMoney > rate) {
+              send += engMoney - rate;
+              eat += rate;
+            } else eat += engMoney;
+          }
+        }
+        document.getElementById("send").innerHTML = send;
+        document.getElementById("eat").innerHTML = eat;
+      }
+      function addSendTr() {
+        sendTr = document.createElement("tr");
+        sendTable.appendChild(sendTr);
+      }
+      function writeToSend(myanLetter) {
+        var td = document.createElement("td");
+        sendTr.appendChild(td);
+        td.innerHTML = myanLetter;
+      }
+      function write_single(_2d, d, r) {
+        //write 2d
+        if (d) _2d = engToMy(_2d);
+        else _2d = engToMy(getR(_2d));
+        writeToSend(_2d);
+
+        if (d && r) {
+          //send both d and r
+          if (d != r) writeToSend(engToMy(d));
+          writeToSend("R");
+          writeToSend(engToMy(r));
+        } else {
+          //only one defined(true)
+          writeToSend("D");
+          if (d) writeToSend(engToMy(d));
+          //only d is defined(send/ true)
+          else if (r) writeToSend(engToMy(r)); //only d is defined(send/ true)
+        }
+        addSendTr();
+      }
+      function eat_d(_2d, newMoney) {
+        var prop = "_" + _2d;
+        var money = parseInt(newMoney);
+        var total = obj[prop] + money;
+        if (total <= rate) {
+          obj[prop] = total;
+          return false;
+        } else {
+          obj[prop] = rate;
+          return total - rate;
+        }
+      }
+      function eat_r(_2d, newMoneyd, diffMoneyr) {
+        var d, r;
+        d = eat_d(_2d, newMoneyd);
+        if (diffMoneyr) {
+          r = eat_d(getR(_2d), diffMoneyr);
+        } else {
+          r = eat_d(getR(_2d), newMoneyd);
+        }
+        if (d || r) write_single(_2d, d, r);
+      }
+      function ok() {
+        sendTable.innerHTML = "";
+        restartCalcTable();
+        addSendTr();
+        var trs = inputTbody.children;
+        for (let i = 0; i < trs.length; i++) {
+          var tds = trs[i].children;
+
+          if (tds.length == 2) {
+            const newMoney = myToEng(tds[1].innerHTML);
+            const Ls = eng_Ls(tds[0].innerHTML);
+            if (Ls.length == 5) {
+              for (let i = 0; i < Ls.length; i++) {
+                const _2d = Ls[i];
+                eat_r(_2d, newMoney, false);
+              }
+            } else {
+              //apu(အပူး)
+              for (let i = 0; i < Ls.length; i++) {
+                const _2d = Ls[i];
+                var d = eat_d(_2d, newMoney);
+                if (d) write_single(_2d, d, false);
+              }
+            }
+          } else if (tds.length == 3) {
+            var newMoney = myToEng(tds[2].innerHTML);
+            if (tds[1].innerHTML == "R") {
+              var _2d = myToEng(tds[0].innerHTML);
+              eat_r(_2d, newMoney, false);
+            } else if (tds[1].innerHTML == "D") {
+              var _2d = myToEng(tds[0].innerHTML);
+              var d = eat_d(_2d, newMoney);
+              if (d) write_single(_2d, d, false);
+            } else {
+              //TODO fiexed for b(ဘရိတ်ဘရိတ်)
+              var multi = myToEng(tds[0].innerHTML);
+              var multiType = tds[1].innerHTML;
+              var _2ds = eng_Ms(multi, multiType);
+              for (let i = 0; i < _2ds.length; i++) {
+                var _2d = _2ds[i];
+                var d = eat_d(_2d, newMoney);
+                if (d) write_single(_2d, d, false);
+              }
+            }
+          } else if (tds.length == 4) {
+            var _2d = myToEng(tds[0].innerHTML);
+            var newMoneyD = myToEng(tds[1].innerHTML);
+            var newMoneyR = myToEng(tds[3].innerHTML);
+            eat_r(_2d, newMoneyD, newMoneyR);
+          }
+        }
+      }
+      var obj = {};
+      function restartCalcTable() {
+        for (let i = 0; i < 10; i++) {
+          for (let j = 0; j < 10; j++) {
+            var prop = "_" + i.toString() + j.toString();
+            obj[prop] = 0;
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

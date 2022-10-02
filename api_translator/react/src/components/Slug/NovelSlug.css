@@ -1,0 +1,36 @@
+.NovelSlug{
+	background-color: var(--main-bgColor);
+	width: 90%;
+	margin: 10px auto;
+	padding: 20px 20px;
+	border-radius: 10px;
+	display: flex;
+	color: #eee;
+	text-decoration: none;
+}
+
+.NovelSlug-picture{
+	width: 150px;
+	height: 200px;
+	margin-right: 20px;
+}
+.NovelSlug-picture.nopicture{
+	background-color: grey;
+}
+.NovelSlug-info {
+	flex: 1;
+	position: relative;
+}
+.NovelSlug-info > * {
+	margin: 5px 0px;
+}
+
+.NovelSlug-tools {
+	padding: 10px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+.NovelSlug-tools > *{
+	margin: 0px 10px;
+}

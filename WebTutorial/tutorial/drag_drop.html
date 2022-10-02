@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Drag Drop API</title>
+	</head>
+	<body>
+		<article>
+			<h2>
+				dragstart and dragenter events are not
+				<strong>always</strong> fired
+			</h2>
+			<p>
+				When they are not fired? They are not fired when a file is
+				dragged from os into the browser.
+			</p>
+		</article>
+		<article>
+			<p>I skipped Interfaces for now. Let's start with basic</p>
+			<ul>
+				<li>
+					<h3>Step 1 : Define draggable item(what is darggable)</h3>
+					<p>
+						set 'draggable' attribute and 'dragstart' event handler
+					</p>
+				</li>
+				<li>
+					<h3>Step 2 : Define the drag data</h3>
+					<p>idk how</p>
+				</li>
+			</ul>
+		</article>
+		<div class="example" id="dragItem" draggable="true">
+			This item is draggable
+		</div>
+		<div class="example" id="dropTarget">This is droppable</div>
+	</body>
+</html>

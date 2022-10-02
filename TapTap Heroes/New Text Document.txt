@@ -1,0 +1,36 @@
+I hope everyone completed Basic Concepts. It includes
+
+1. What's Python?
+high level programming language
+
+2. Hello World! Program
+print("Hello World!)
+print('Hi')
+NOTE- the print statement gives the user multiple lines of output.
+We can use both '...' and "..." inside ().
+print("Ko Ko said, \" I'm hungry \")
+print(' Ko Ko said, "You\'re Welcome". ')
+NOTE- But we need to use \' to print ' inside '...'
+Similarly \" inside "..." to print "
+
+3. VALUE TYPES
+Most common types are int(integer e.g. 10), str (string, e.g. Hello) & float (floating point e.g. 3.142)
+print(15)
+print("15")
+NOTE-both lines are correct.
+15 means 15 is integer.
+"15" means 15 is string.
+print(Hi)
+NOTE-this is wrong because Hi cannot be integer. We need either ' ' or " "
+
+4. ASSIGNING
+Hi=5
+print(Hi)
+print
+NOTE- This is correct because
+
+OPERATIONS
+Since we are Maths Student, this is the easiest part. 
+
+
+NOTE- Minus(-) is unary operator as well as binary operator in Python.

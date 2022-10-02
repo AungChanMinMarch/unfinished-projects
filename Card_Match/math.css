@@ -1,0 +1,101 @@
+
+    *{
+        box-sizing: border-box!important;
+      }
+    .overlay-text {
+      font-size: 10vw;
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      
+      background-color : rgba(250,250,250,0.9);
+}
+#start{
+display: flex;
+}
+.game-info-container {
+grid-column: 1 / -1;
+display: flex;
+justify-content: space-between;
+}
+.game-info {
+font-size: 4.5vw;
+}
+    .cardcontainer{
+        display:grid;
+        grid-template-columns: repeat(4, auto);
+        grid-gap: 2vw;
+        justify-content: center;
+    }
+    .card{
+        width: 20vw;
+        height: 30vw;
+    }
+    .cardface{
+        width: 100%;
+        height: 100%;
+        border: 1vw solid black;
+        border-radius: 1vw;
+        /*making ?(logo) center both vertically & horizontally*/
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .cardface >  span{
+          margin-top : -2vw;
+        /*making ?(text) center both vertically & horizontally*/
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .cardfront{
+      display:none;
+    }
+    .cardback{
+        background-color: #4b9107;
+    }
+    .cardfront.black{
+      background-color: #4d0791;
+    }
+    .cardfront.black span{
+      background-color: #870dff;
+    }
+    .cardfront.white{
+      background-color: #870dff;
+    }
+    .cardfront.white span{
+      background-color: #4d0791;
+    }
+    .cardfront span{
+        width: 15vw;
+        height: 15vw;
+        /*styling*/
+        font-size: 15vw;
+
+        /* border */
+        border: 1.5vw solid;
+        border-radius: 50%;
+    }
+    .black{
+        color: black!important;
+    }
+    .white{
+        color: white!important;
+    }
+    .cardback>span{
+        width: 15vw;
+        height: 21vw;
+        /*styling*/
+        font-size: 15vw;
+        color: black;
+        background-color: #84ff0d;
+        /* border */
+        border: 1vw solid black;
+        border-radius: 50%;
+    }
